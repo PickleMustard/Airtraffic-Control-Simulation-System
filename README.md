@@ -7,6 +7,8 @@ The system for our CS 3354 Systems Engineering Course
 2. Move current directory to Airtraffic-Control-Simulation-System
 3. Install [python 3.9.7](https://www.python.org/downloads/release/python-397/)
 4. Install [pipenv](https://github.com/pypa/pipenv#installation)
+5. > pipenv install --dev
+6. Switch to your branch with > git checkout *branch*
 
 ## Update Development Environment
    Install dependencies
