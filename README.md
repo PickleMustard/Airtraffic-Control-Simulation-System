@@ -15,7 +15,7 @@ The system for our CS 3354 Systems Engineering Course
 ### add
 > git add .
 
-Add all new files in the current directory
+Add all new files in the current directory.
 
 ### commit
 > git commit -m "*message*" -a
