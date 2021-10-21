@@ -2,42 +2,32 @@
 The system for our CS 3354 Systems Engineering Course
 
 ## Setup
-1. Install [python 3.9.7](https://www.python.org/downloads/release/python-397/)
-2. Install [pipenv](https://github.com/pypa/pipenv#installation)
+1. Clone git repo:
+   > git clone https://github.com/PickleMustard/Airtraffic-Control-Simulation-System.git
+2. Move current directory to Airtraffic-Control-Simulation-System
+3. Install [python 3.9.7](https://www.python.org/downloads/release/python-397/)
+4. Install [pipenv](https://github.com/pypa/pipenv#installation)
 
-## Setup Development Environment
-1. Install dependencies
+## Update Development Environment
+   Install dependencies
    > pipenv install --dev
 
    Ensure that it **is** "--dev" and **not** "-dev"
 
-## Git Instructions
-### add
-> git add .
+## Basic Git Instructions
 
-Add all new files in the current directory.
-
-### commit
-> git commit -m "*message*" -a
-
-Commit all changes, including deletes, with a message to your current branch
-
-### push
-> git push origin *branch*
-
-push to the branch you are working on
-
-> git push origin *sourceBranch*:*destinationBranch* -f
-
-Push from *sourceBranch* to *destinationBranch*. Forced. Recommended you check that there is nothing important in the destination branch
-
-### pull
+### Pull Updates
 > git pull
 
-Pull changes
+### Update YOUR branch
+1. Navigate to the directory your branch is in
+2. > git add .
+3. > git commit -m "*message*" -a
+4. > git push origin *branch*
 
+### Push to a different branch
+1. Navigate to the directory your branch is in
+2. > git add .
+3. > git commit -m "*message*" -a
+4. > git push origin *sourceBranch*:*destinationBranch*
 
-
-
-
-    
