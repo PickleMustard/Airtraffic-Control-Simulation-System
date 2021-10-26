@@ -8,7 +8,8 @@ The system for our CS 3354 Systems Engineering Course
 3. Install [python 3.9.7](https://www.python.org/downloads/release/python-397/)
 4. Install [pipenv](https://github.com/pypa/pipenv#installation)
 5. > pipenv install --dev
-6. Switch to your branch with > git checkout *branch*
+6. Switch to your branch with 
+   > git checkout *branch*
 
 ## Update Development Environment
    Install dependencies
@@ -32,4 +33,9 @@ The system for our CS 3354 Systems Engineering Course
 2. > git add .
 3. > git commit -m "*message*" -a
 4. > git push origin *sourceBranch*:*destinationBranch*
+
+## Kivy Instructions
+
+### Run the app
+> pipenv run python main.py
 
