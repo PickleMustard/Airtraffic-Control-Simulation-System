@@ -1,0 +1,11 @@
+#:kivy 2.0.0
+
+<MainMenuWindow>:
+    name: "MainMenu"
+
+    Button:
+        text: "Go Back"
+
+        on_release:
+            app.root.current = "Login"
+            root.manager.transition.direction = "left"
