@@ -1,0 +1,24 @@
+#:kivy 2.0.0
+
+<LoginWindow>:
+    name: "Login"
+
+    GridLayout:
+        cols:1
+
+        GridLayout:
+            cols: 2
+
+            Label:
+                text: "Password: "
+
+            TextInput:
+                id: passw
+                multiline: False
+
+        Button:
+            text: "Submit"
+            on_release:
+                app.root.current = "MainMenu"
+                root.manager.transition.direction = "left"
+                root.testFunction()
