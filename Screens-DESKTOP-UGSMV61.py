@@ -6,7 +6,6 @@ from kivy.lang import Builder
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.label import Label
 from kivy.properties import NumericProperty
-from kivy.properties import StringProperty
 
 class WindowManager(ScreenManager):
     pass
@@ -26,13 +25,21 @@ class PlaneInfoWindow(Screen):
     pass
 
 class PlaneInfoRow(RecycleDataViewBehavior):
-    pass#value = StringProperty()
-    #def __init__(self, **kwargs):
-    #    super(PlaneInfoRow, self).__init__(**kwargs)
-        #self.value = value
+    value = NumericProperty(1)
+    def __init__(self, value, **kwargs):
+        super(PlaneInfoRow, self).__init__(**kwargs)
+        self.value = value
 
 class PlaneInfoList(BoxLayout):
-    pass    #Clock.schedule_once(self.finish_init,0)
+
+    def __init__(self,**kwargs):
+        super().__init__(**kwargs)
+
+        self.ids.rv.data = [
+            {'name.text': ''.join(sample(ascii_lowercase, 6)),
+             'value': str(randint(0, 2000))}
+            for x in range(50)]
+        #Clock.schedule_once(self.finish_init,0)
 
     #def finish_init(self, dt):
     #    self.populate()
@@ -44,9 +51,6 @@ class PlaneInfoList(BoxLayout):
         #    {'name.text': ''.join(sample(ascii_lowercase, 6)),
         #     'value': str(randint(0, 2000))}
         #    for x in range(50)]
-        self.rv.data = [
-            {'value': ''.join(sample(ascii_lowercase, 6))} for x in range (50)
-        ]
 
     def sort(self):
         self.rv.data = sorted(self.rv.data, key=lambda x: x['name.text'])

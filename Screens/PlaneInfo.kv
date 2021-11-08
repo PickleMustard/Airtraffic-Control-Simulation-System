@@ -1,0 +1,93 @@
+#:kivy 2.0.0
+
+<PlaneInfoWindow>:
+    name: "PlaneInfo"
+
+    GridLayout:
+        rows: 2
+
+        GridLayout: 
+            canvas:
+                Color:
+                    rgba: 0.4, 0.4, 0.4, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            size_hint: 1, .07
+            cols: 2
+
+            padding: dp(4)
+
+            AnchorLayout:
+                size_hint: .5, 1
+                anchor_x: 'left'
+                anchor_y: 'center'
+
+                Label:
+                    size_hint: .25, 1
+                    font_size: sp(20)
+                    color: (0,0,0, 1)
+                    anchor_x: 'left'
+                    text: "Plane Name"  
+
+            AnchorLayout:
+                size_hint: .5, 1
+                anchor_x: 'right'
+
+                TextInput:
+                    size_hint: .25, .7
+                    hint_text: "Search"
+                    multiline: False
+                    halign: 'center'
+
+        PlaneInfoList: 
+
+<PlaneInfoRow>:
+    canvas.before:
+        Color:
+            rgba: 0.5, 0.5, 0.5, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    value: ''
+#    GridLayout:
+#        cols: 2
+#    Label:
+#        id: name
+    Label:
+        text: root.value
+#        text: "HELLO"
+
+<PlaneInfoList>:
+    canvas:
+        Color:
+            rgba: 0.3, 0.3, 0.3, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    rv: InfoList
+    GridLayout:
+        rows: 2
+        padding: dp(8)
+
+        Button:
+            text: 'Populate list'
+            font_size: sp(12)
+            size_hint: 1, .1
+            on_press: root.populate()
+
+        RecycleView:
+            id: InfoList
+            scroll_type: ['bars', 'content']
+            scroll_wheel_distance: dp(118)
+            bar_width: dp(14)
+            viewclass: 'Button'
+            RecycleBoxLayout:
+                default_size: None, dp(56)
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+                orientation: 'vertical'
+                spacing: dp(2)
+                

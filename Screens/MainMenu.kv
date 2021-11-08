@@ -3,9 +3,20 @@
 <MainMenuWindow>:
     name: "MainMenu"
 
-    Button:
-        text: "Go Back"
+    GridLayout:
+        cols: 3
+        rows: 3
 
-        on_release:
-            app.root.current = "Login"
-            root.manager.transition.direction = "left"
+        Button:
+            text: "Schedule"
+
+            on_release:
+                app.root.current = "Schedule"
+                root.manager.transition.direction = "left"
+
+        Button:
+            text: "Plane Info"
+
+            on_release:
+                app.root.current = "PlaneInfo"
+                root.manager.transition.direction = "left"
