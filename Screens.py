@@ -25,28 +25,27 @@ from string import ascii_lowercase
 class PlaneInfoWindow(Screen):
     pass
 
-class PlaneInfoRow(RecycleDataViewBehavior):
-    pass#value = StringProperty()
-    #def __init__(self, **kwargs):
-    #    super(PlaneInfoRow, self).__init__(**kwargs)
-        #self.value = value
+class PlaneInfoRow(RecycleDataViewBehavior,BoxLayout):
+    dataName = StringProperty()
+    dataValue = StringProperty()
+    def __init__(self, **kwargs):
+        super(PlaneInfoRow, self).__init__(**kwargs)
 
 class PlaneInfoList(BoxLayout):
-    pass    #Clock.schedule_once(self.finish_init,0)
+    def __init__(self, **kwargs):
+        super(PlaneInfoList, self).__init__(**kwargs)
+        Clock.schedule_once(self.finish_init,0)
 
-    #def finish_init(self, dt):
-    #    self.populate()
+    def finish_init(self, dt):
+        self.populate()
 
     # Dillon I need a query here for a plane's info!!!!---------------------------------------
     def populate(self):
-        #print("Populating")
-        #self.rv.data = [
-        #    {'name.text': ''.join(sample(ascii_lowercase, 6)),
-        #     'value': str(randint(0, 2000))}
-        #    for x in range(50)]
+        print("Populating")
         self.rv.data = [
-            {'value': ''.join(sample(ascii_lowercase, 6))} for x in range (50)
-        ]
+            {'dataName': ''.join(sample(ascii_lowercase, 6)),
+             'dataValue': str(randint(0, 2000))}
+            for x in range(50)]
 
     def sort(self):
         self.rv.data = sorted(self.rv.data, key=lambda x: x['name.text'])
@@ -70,12 +69,11 @@ class PlaneInfoList(BoxLayout):
     # Populate the list at the start - not functioning
 #    def __post_init__(self, **kwargs):
 #        super().__init__(**kwargs)
-#        self.populate(self)
+#        PlaneInfoList
 
 class ScheduleWindow(Screen):
     pass
-
-
+#https://github.com/kivy/kivy/issues/6582
 class ArrivalList(BoxLayout):
     # Dillon I need a query here for a plane's info!!!!---------------------------------------
     def populate(self):
@@ -83,7 +81,6 @@ class ArrivalList(BoxLayout):
             {'name.text': ''.join(sample(ascii_lowercase, 6)),
              'value': str(randint(0, 2000))}
             for x in range(50)]
-
 
 class DepartureList(BoxLayout):
     # Dillon I need a query here for a plane's info!!!!---------------------------------------

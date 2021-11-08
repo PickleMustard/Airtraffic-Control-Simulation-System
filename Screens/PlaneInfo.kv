@@ -50,14 +50,13 @@
         Rectangle:
             size: self.size
             pos: self.pos
-    value: ''
-#    GridLayout:
-#        cols: 2
-#    Label:
-#        id: name
+    dataName: ''
+    dataValue: ''
+    
     Label:
-        text: root.value
-#        text: "HELLO"
+        text: root.dataName
+    Label:
+        text: root.dataValue
 
 <PlaneInfoList>:
     canvas:
@@ -81,8 +80,8 @@
             id: InfoList
             scroll_type: ['bars', 'content']
             scroll_wheel_distance: dp(118)
-            bar_width: dp(14)
-            viewclass: 'Button'
+#           bar_width: dp(20)
+            viewclass: 'PlaneInfoRow'
             RecycleBoxLayout:
                 default_size: None, dp(56)
                 default_size_hint: 1, None
