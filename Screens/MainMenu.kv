@@ -1,11 +1,45 @@
+#Only button that works at the moment includes: Schedule, Plane Info, and Logout
 #:kivy 2.0.0
 
 <MainMenuWindow>:
-    name: "MainMenu"
+    GridLayout:
+        padding: 20, 20, 20, 20
+        spacing: 10
+        cols: 3
+        rows: 3
 
-    Button:
-        text: "Go Back"
+        Button:
+            text: "Schedule"
 
-        on_release:
-            app.root.current = "Login"
-            root.manager.transition.direction = "left"
+            on_release:
+                app.root.current = "Schedule"
+                root.manager.transition.direction = "left"
+
+        Button:
+            text: "Plane Info"
+
+            on_release:
+                app.root.current = "PlaneInfo"
+                root.manager.transition.direction = "left"
+
+        Button:
+            text: "Radar"
+
+        Button:
+            text: "Ground Crew"
+
+        Button:
+            text: "Terminal Simulation"
+
+        Button:
+            text: "Master Log"
+
+        Button:
+            text: "Incident Log"
+
+        Button:
+            text: "Logout"
+
+            on_release:
+                app.root.current = "loginScreen"
+                root.manager.transition.direction = "right"

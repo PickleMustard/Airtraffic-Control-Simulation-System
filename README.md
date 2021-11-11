@@ -1,5 +1,16 @@
 # Airtraffic-Control-Simulation-System
+
 The system for our CS 3354 Systems Engineering Course
+
+## Project Structure
+
+.kv files are "kivy" files, a file type specific to our front-end implementation
+
+- main.py - *Contains the app definition, loads main.kv*
+- main.kv  - *Loads individual screens and sets up window manager*
+- Screens.py - *Contains class defintions for screens*
+- Screens - *Contains .kv files that contain kivy widget defintions. Each file corresponds to a class in Screens.py*
+  - ...
 
 ## Setup
 1. Clone git repo:
