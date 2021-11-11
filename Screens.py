@@ -1,8 +1,9 @@
 #This code only have comments on the Login page as that is what I have wrote
 #Other comments about the code can be found on someone elses branch
 #When trying to login use "Admin1" for username and "Test1234" for the password
-#As of right now only 3 buttons work on the main menu Schedule, Plane Info, and Logout
+#My verson only 3 buttons work on the main menu Schedule, Plane Info, and Logout
 #again, other comment about how they work can be found on a different branch (check Noah's branch)
+#he should also have implement more buttons
 
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.boxlayout import BoxLayout

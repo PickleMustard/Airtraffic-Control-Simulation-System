@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44c6fdf4-8203-425c-ac6b-74285bd855a2" name="Changes" comment="Connect login backend with login frontend&#10;Added buttons for main menu" />
+    <list default="true" id="44c6fdf4-8203-425c-ac6b-74285bd855a2" name="Changes" comment="Connect login backend with login frontend&#10;Added buttons for main menu">
+      <change beforePath="$PROJECT_DIR$/Screens.py" beforeDir="false" afterPath="$PROJECT_DIR$/Screens.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
