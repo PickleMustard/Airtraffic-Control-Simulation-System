@@ -7,6 +7,9 @@ from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.label import Label
 from kivy.properties import NumericProperty
 from kivy.properties import StringProperty
+from kivy.animation import Animation
+from kivy.uix.widget import Widget
+from kivy.uix.floatlayout import FloatLayout
 
 class WindowManager(ScreenManager):
     pass
@@ -65,27 +68,70 @@ class PlaneInfoList(BoxLayout):
     def remove(self):
         if self.rv.data:
             self.rv.data.pop(0)
-            
-    # Populate the list at the start - not functioning
-#    def __post_init__(self, **kwargs):
-#        super().__init__(**kwargs)
-#        PlaneInfoList
 
 class ScheduleWindow(Screen):
     pass
+
+class ArrivalRow(RecycleDataViewBehavior,BoxLayout):
+    planeName = StringProperty()
+    planeArrivalTime = StringProperty()
+    def __init__(self, **kwargs):
+        super(ArrivalRow, self).__init__(**kwargs)
+
+class DepartureRow(RecycleDataViewBehavior,BoxLayout):
+    planeName = StringProperty()
+    planeDepartureTime = StringProperty()
+    def __init__(self, **kwargs):
+        super(DepartureRow, self).__init__(**kwargs)
+
 #https://github.com/kivy/kivy/issues/6582
 class ArrivalList(BoxLayout):
+    def __init__(self, **kwargs):
+        super(ArrivalList, self).__init__(**kwargs)
+        Clock.schedule_once(self.finish_init,0)
+
+    def finish_init(self, dt):
+        self.populate()
+
     # Dillon I need a query here for a plane's info!!!!---------------------------------------
     def populate(self):
         self.rv.data = [
-            {'name.text': ''.join(sample(ascii_lowercase, 6)),
-             'value': str(randint(0, 2000))}
+            {'planeName': ''.join(sample(ascii_lowercase, 6)),
+             'planeArrivalTime': str(randint(0, 2000))}
             for x in range(50)]
 
 class DepartureList(BoxLayout):
+    def __init__(self, **kwargs):
+        super(DepartureList, self).__init__(**kwargs)
+        Clock.schedule_once(self.finish_init,0)
+
+    def finish_init(self, dt):
+        self.populate()
+
     # Dillon I need a query here for a plane's info!!!!---------------------------------------
     def populate(self):
         self.rv.data = [
-            {'name.text': ''.join(sample(ascii_lowercase, 6)),
-             'value': str(randint(0, 2000))}
+            {'planeName': ''.join(sample(ascii_lowercase, 6)),
+             'planeDepartureTime': str(randint(0, 2000))}
             for x in range(50)]
+
+class SimulatedWorker(Widget):
+    def __init__(self, **kwargs):
+        super(SimulatedWorker, self).__init__(**kwargs)
+
+class Test(FloatLayout):
+    pass
+
+class TerminalSimulationWindow(Screen):
+
+    def animationTestt(self, widget, **kwargs):
+        anim = Animation(x=0, y=0)
+        anim.start(self.ids.otherExample)
+        print (self.ids.otherExample.height)
+        print (self.ids.otherExample.width)
+        print(str(self.height) + " " + str(self.width))
+
+
+    def animationTest(self, widget, **kwargs):
+        anim = Animation(x=1200, y=980, duration=1)
+        anim.start(widget)
