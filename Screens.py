@@ -15,6 +15,7 @@ from kivy.properties import StringProperty
 from kivy.animation import Animation
 from kivy.uix.widget import Widget
 from kivy.uix.floatlayout import FloatLayout
+import MasterLogAccess
 
 # Class for WindowManager controller
 class WindowManager(ScreenManager):
@@ -47,6 +48,8 @@ class PlaneInfoRow(RecycleDataViewBehavior,BoxLayout):
 #   Autopopulates on the first clock
 class PlaneInfoList(BoxLayout):
     def __init__(self, **kwargs):
+        global Log_access
+        Log_access = MasterLogAccess.MasterLogAccess()
         super(PlaneInfoList, self).__init__(**kwargs)
         Clock.schedule_once(self.finish_init,0)
 
@@ -54,14 +57,11 @@ class PlaneInfoList(BoxLayout):
     def finish_init(self, dt):
         self.populate()
 
-    # TODO: Write query for populating list of plane info
     # Populate list of plane info from database
     def populate(self):
         print("Populating")
-        self.rv.data = [
-            {'dataName': ''.join(sample(ascii_lowercase, 6)),
-             'dataValue': str(randint(0, 2000))}
-            for x in range(50)]
+        query_result = Log_access.temporary_Info_List_Search()
+        self.rv.data = [{'dataName': str(x[0]), 'dataValue': x[1]} for x in query_result]
 
     # Sort the list plane info
     def sort(self):
