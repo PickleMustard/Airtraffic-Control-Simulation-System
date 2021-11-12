@@ -3,6 +3,7 @@
 The system for our CS 3354 Systems Engineering Course
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 ## Project Structure
 
@@ -15,6 +16,8 @@ The system for our CS 3354 Systems Engineering Course
   - ...
 
 >>>>>>> a94f89242ea14abd82b71faf5868975c6dfe958f
+=======
+>>>>>>> feature
 ## Setup
 1. Clone git repo:
    > git clone https://github.com/PickleMustard/Airtraffic-Control-Simulation-System.git

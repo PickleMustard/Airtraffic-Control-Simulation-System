@@ -1,0 +1,111 @@
+#:kivy 2.0.0
+
+# Schedule.kv
+# Description:
+#   Definition of the GUI for the view of the schedule.
+#   It contains the list of arrivals and departures
+
+
+<ArrivalRow>:
+    canvas.before:
+        Color:
+            rgba: 0.5, 0.5, 0.5, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    planeName: ''
+    planeArrivalTime: ''
+    Label:
+        text: root.planeName
+    Label:
+        text: root.planeArrivalTime
+
+<DepartureRow>:
+    canvas.before:
+        Color:
+            rgba: 0.5, 0.5, 0.5, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    planeName: ''
+    planeDepartureTime: ''
+    Label:
+        text: root.planeName
+    Label:
+        text: root.planeDepartureTime
+
+<ScheduleWindow>:
+    name: "Schedule"
+
+    Button:
+        test: "HELLO"
+
+    GridLayout:
+        cols: 2
+
+        ArrivalList: 
+        DepartureList:
+
+<ArrivalList>:
+    canvas:
+        Color:
+            rgba: 0.3, 0.3, 0.3, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    rv: Arrivals
+    GridLayout:
+        rows: 2
+        padding: dp(8)
+
+        Button:
+            text: 'Populate Arrivals'
+            font_size: sp(12)
+            size_hint: 1, .1
+            on_press: root.populate()
+        RecycleView:
+            id: Arrivals
+            scroll_type: ['bars', 'content']
+            scroll_wheel_distance: dp(118)
+            bar_width: dp(14)
+            viewclass: 'ArrivalRow'
+            RecycleBoxLayout:
+                default_size: None, dp(56)
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+                orientation: 'vertical'
+                spacing: dp(2)
+                
+
+<DepartureList>:
+    canvas:
+        Color:
+            rgba: 0.3, 0.3, 0.3, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    rv: Departures
+    GridLayout:
+        rows: 2
+        padding: dp(8)
+
+        Button:
+            text: 'Populate Departures'
+            font_size: sp(12)
+            size_hint: 1, .1
+            on_press: root.populate()
+        RecycleView:
+            id: Departures
+            scroll_type: ['bars', 'content']
+            scroll_wheel_distance: dp(118)
+            bar_width: dp(10)
+            viewclass: 'DepartureRow'
+            RecycleBoxLayout:
+                default_size: None, dp(56)
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+                orientation: 'vertical'
+                spacing: dp(2)
+                

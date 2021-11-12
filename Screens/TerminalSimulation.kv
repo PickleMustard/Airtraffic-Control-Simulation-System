@@ -1,0 +1,43 @@
+#:kivy 2.0.0
+
+# TerminalSimulation.kv
+# Description:
+#   Definition of the GUI for simulation of a terminal
+
+<SimulatedWorker>:
+    size_hint: .1,.1
+    Label:
+        canvas:
+            Color:
+                rgba: 1, 0, 1, 1
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        text: "BLAdfdsfds"
+
+<TerminalSimulationWindow>:
+    id: TSW
+    name: "TerminalSimulation"
+
+    FloatLayout:
+        id: 2
+        Button:
+            id: otherExample
+            text: "Test 1"
+            size_hint: .25,.25
+            on_release:
+                root.animationTest(self)
+
+        Button:
+            id: errorExample
+            text: "Test 2"
+            font_size: dp(30)
+            pos: 200, 200
+            size_hint: .25,.25
+            on_release:
+                root.animationTestt(root)
+
+        SimulatedWorker:
+            id: 4
+
+        

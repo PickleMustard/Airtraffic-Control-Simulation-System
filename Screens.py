@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> feature
 from kivy.uix.screenmanager import ScreenManager, Screen
 
 class WindowManager(ScreenManager):
@@ -9,6 +12,7 @@ class LoginWindow(Screen):
         print("TEST FUNCTION")
 
 class MainMenuWindow(Screen):
+<<<<<<< HEAD
     pass
 =======
 # Screens.py
@@ -171,3 +175,6 @@ class AlertCreator():
 
     # Create alert
 >>>>>>> a94f89242ea14abd82b71faf5868975c6dfe958f
+=======
+    pass
+>>>>>>> feature
