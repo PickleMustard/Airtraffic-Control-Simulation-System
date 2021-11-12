@@ -14,7 +14,6 @@ class Column_headers(enum.Enum):
 class MasterLogAccess():
 	
 	def __init__(self):
-		print("Initialiing")
 		global MasterLog
 		MasterLog = mysql.connector.connect(
 			host="localhost",

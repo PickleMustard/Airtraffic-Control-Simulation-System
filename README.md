@@ -47,6 +47,18 @@ The system for our CS 3354 Systems Engineering Course
 
 ## Kivy Instructions
 
+#Creating the Database
+To ensure the database is able to run, take these steps
+1. Ensure that mySQL is installed on your computer
+	>https://dev.mysql.com/downloads
+	>Go to terminal and type mysql, if nothing occurs, it needs to be installed
+	>Go to the link above and follow steps to setup on your machine
+2. Create a user that has all permissions with a unique username and password
+3. Go into CreateDatabase.py and MasterLogAccess.py and change the username and password to the unique ones created
+4. Run CreateDatabase.py
+	>This will create the database and tables that we use
+5. The database should be prepped along with the code
+
 ### Run the app
 > pipenv run python main.py
 
