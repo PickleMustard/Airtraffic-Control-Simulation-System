@@ -6,6 +6,7 @@ The system for our CS 3354 Systems Engineering Course
 
 .kv files are "kivy" files, a file type specific to our front-end implementation
 
+<<<<<<< HEAD
 - main.py - *Contains the app definition, loads main.kv and Screens.py*
 - main.kv  - *Loads individual screens and sets up window manager*
 - Screens.py - *Contains class defintions for screens*
@@ -61,4 +62,3 @@ To ensure the database is able to run, take these steps
 
 ### Run the app
 > pipenv run python main.py
-
