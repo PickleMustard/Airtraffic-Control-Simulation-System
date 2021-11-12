@@ -1,9 +1,10 @@
 # main.py
-# Description:
-#	Contains the definition of the application
+# Description: 
+#   Contains the definition of the application
 
 from kivy.app import App
 from kivy.lang import Builder
+import Screens
 
 main = Builder.load_file("main.kv")
     
