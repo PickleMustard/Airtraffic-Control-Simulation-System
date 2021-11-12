@@ -1,11 +1,17 @@
 #:kivy 2.0.0
 
+# main.kv
+# Description:
+#   This file contains the definition of the window manager for the application. 
+#   It also connects defined screens to the window manager
+
 #:include ./Screens/Login.kv
 #:include ./Screens/MainMenu.kv
 #:include ./Screens/PlaneInfo.kv
 #:include ./Screens/Schedule.kv
 #:include ./Screens/TerminalSimulation.kv
 
+# GUI definition of the WindowManager controller
 WindowManager:
     LoginWindow:
     MainMenuWindow:

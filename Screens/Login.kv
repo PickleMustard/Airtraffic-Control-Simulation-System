@@ -1,5 +1,9 @@
 #:kivy 2.0.0
 
+# Login.kv
+# Description:
+#   Definition of the GUI of the login screen 
+
 <LoginWindow>:
     name: "Login"
 
@@ -21,4 +25,3 @@
             on_release:
                 app.root.current = "MainMenu"
                 root.manager.transition.direction = "left"
-                root.testFunction()
