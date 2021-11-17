@@ -24,6 +24,9 @@
 
         Button:
             text: "Radar"
+            on_release:
+                app.root.current = "RadarScreen"
+                root.manager.transition.direction = "left"
 
         Button:
             text: "Ground Crew"

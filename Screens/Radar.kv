@@ -1,0 +1,64 @@
+#:kivy 2.0.0
+
+#simple radar mock up
+<RadarWindow>:
+    name: "RadarScreen"
+
+    canvas.before:
+        Rectangle:
+            pos: 0,0
+            size: root.width * 2 / 3, self.height
+            source: "radarPic.png"
+
+    canvas:
+        Color:
+            rgb: 244/255, 243/255, 238/255, 1
+        Rectangle:
+            pos: root.width * 2 / 3, 0
+            size: 5, self.height
+
+        Rectangle:
+            pos: root.width * 2 / 3, (root.height - 50) * 9 / 40
+            size: root.width / 3, 5
+
+        Rectangle:
+            pos: root.width * 2 /3, root.height - 50
+            size: root.width / 3, 5
+
+
+    BoxLayout:
+        Widget:
+            size_hint_x: None
+            width: root.width * 2 / 3
+
+        BoxLayout:
+            orientation: "vertical"
+
+            Label
+                text: "Plane Info"
+                font_size: sp(30)
+                size_hint_y: None
+                height: 50
+            BoxLayout:
+                size_hint_y: None
+                height: root.height * 29 / 40
+                orientation: "vertical"
+
+            BoxLayout:
+                spacing: 30
+                padding: 20, 20, 20, 20
+                Button:
+                    text: "Bad Weather"
+                Button:
+                    text: "Main Menu"
+                    on_release:
+                        app.root.current = "menuScreen"
+                        root.manager.transition.direction = "right"
+
+<Plane>:
+    id: plane
+
+    Color:
+        rgb: 1, 0 ,0, 1
+        Ellipse:
+            size: dp(20), dp(20)

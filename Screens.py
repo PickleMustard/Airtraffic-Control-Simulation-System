@@ -4,7 +4,7 @@
 #My verson only 3 buttons work on the main menu Schedule, Plane Info, and Logout
 #again, other comment about how they work can be found on a different branch (check Noah's branch)
 #he should also have implement more buttons
-
+from kivy.metrics import dp
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.boxlayout import BoxLayout
 from kivy.clock import Clock
@@ -16,10 +16,19 @@ from kivy.properties import NumericProperty, ObjectProperty
 from kivy.properties import StringProperty
 
 #class to change between screens
+from kivy.uix.widget import Widget
+
+
 class WindowManager(ScreenManager):
     login = ObjectProperty(None)
     mainMenu = ObjectProperty(None)
 
+#this hos the code for the radar page
+class RadarWindow(Screen):
+    planes = [ObjectProperty(None), ObjectProperty(None), ObjectProperty(None), ObjectProperty(None)]
+
+class Plane(Widget):
+    pass
 #this hold the code for the login page
 class LoginWindow(Screen):
     #ObjectPropert retrieve the text input from the .kv file

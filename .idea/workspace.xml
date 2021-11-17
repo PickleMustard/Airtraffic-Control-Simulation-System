@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="44c6fdf4-8203-425c-ac6b-74285bd855a2" name="Changes" comment="Connect login backend with login frontend&#10;Added buttons for main menu">
+      <change afterPath="$PROJECT_DIR$/Screens/Radar.kv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/radarPic.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Screens.py" beforeDir="false" afterPath="$PROJECT_DIR$/Screens.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Screens/Login.kv" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/Login.kv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Screens/MainMenu.kv" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/MainMenu.kv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Screens/Manager.kv" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/Manager.kv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.kv" beforeDir="false" afterPath="$PROJECT_DIR$/main.kv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,11 +29,15 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="20ZK63MmlTp55GBtGguCnVyRNYP" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -95,6 +105,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Connect login backend with login frontend&#10;Added buttons for main menu" />
     <option name="LAST_COMMIT_MESSAGE" value="Connect login backend with login frontend&#10;Added buttons for main menu" />
   </component>
