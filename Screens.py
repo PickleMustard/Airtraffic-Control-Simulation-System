@@ -15,7 +15,13 @@ from kivy.properties import StringProperty
 from kivy.animation import Animation
 from kivy.uix.widget import Widget
 from kivy.uix.floatlayout import FloatLayout
+from kivy.core.window import Window
 import MasterLogAccess
+import weakref
+
+# Set window size
+Window.size = (1280, 720)
+Window.minimum_width, Window.minimum_height = Window.size
 
 # Class for WindowManager controller
 class WindowManager(ScreenManager):
@@ -59,7 +65,6 @@ class PlaneInfoList(BoxLayout):
 
     # Populate list of plane info from database
     def populate(self):
-        print("Populating")
         query_result = Log_access.temporary_Info_List_Search()
         self.rv.data = [{'dataName': str(x[0]), 'dataValue': x[1]} for x in query_result]
 
@@ -133,24 +138,46 @@ class DepartureList(BoxLayout):
             for x in range(50)]
 
 # Class representing a worker in the simulation of the ground crew simulation
-class SimulatedWorker(Widget):
+class TerminalSimulatedPlane(Widget):
     def __init__(self, **kwargs):
-        super(SimulatedWorker, self).__init__(**kwargs)
+        super(TerminalSimulatedPlane, self).__init__(**kwargs)
 
 # Class for the TerminalSimulationWindow root widget
 class TerminalSimulationWindow(Screen):
+    planes = []
+    def __init__(self, **kwargs):
+        super(TerminalSimulationWindow, self).__init__(**kwargs)
+        self.planes = []
+        self.initializePlanes()
 
-    def animationTestt(self, widget, **kwargs):
-        anim = Animation(x=0, y=0)
-        anim.start(self.ids.otherExample)
-        print (self.ids.otherExample.height)
-        print (self.ids.otherExample.width)
-        print(str(self.height) + " " + str(self.width))
+    # Initialize simulated plane objects
+    #   Planes are initialized in an array because adding and referencing them by ids is not possible to do dynamically
+    #   Plane number and initial positions are determined by a query (not yet implemented)
+    def initializePlanes(self):
+        # Figure out the number of planes in the simulation
+        # TODO: make a query to determine number of planes
+        for x in range(0, 5):
+            newPlane = TerminalSimulatedPlane()
+            # TODO: Make a query to determine the initial position of each plane
+            newPlane.pos = (randint(0,300), randint(0,300))
+            self.planes.append(newPlane)
+            self.add_widget(self.planes[len(self.planes)-1])
+
+    # Animate the given widget
+    #   wIndex - String - The index of the widget to animate          
+    #   destX - Num - The x position to animate to
+    #   destY - Num - The y position to animate to
+    def animate(self, wIndex, destX, destY, **kwargs): 
+        anim = Animation(x= destX, y = destY, duration=1, animAngle=90)
+        for p in self.planes:
+            anim.start(self.planes[wIndex])
+                
 
 
-    def animationTest(self, widget, **kwargs):
-        anim = Animation(x=1200, y=980, duration=1)
-        anim.start(widget)
+
+# Class for controller for simulated workers
+class SimulatedWorkerAnimationController():
+    pass
 
 # Class for alert creator
 class AlertCreator():

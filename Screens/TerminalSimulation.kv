@@ -4,40 +4,51 @@
 # Description:
 #   Definition of the GUI for simulation of a terminal
 
-<SimulatedWorker>:
-    size_hint: .1,.1
-    Label:
-        canvas:
-            Color:
-                rgba: 1, 0, 1, 1
-            Rectangle:
-                size: self.size
-                pos: self.pos
-        text: "BLAdfdsfds"
+<TerminalSimulatedPlane>:
+    
+    canvas: 
+        # Color Only needed for testing. It shows the scaling of image relative to the root widget
+        Color:
+            rgba: 0, 0, 1, 1    # Blue
+        Rotate:
+            angle: root.animAngle
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    size_hint: .1, .1
+    animAngle: 0
+
+    Image: 
+        source: "./resources/images/GoogleAirplane.png"
+        pos: root.pos
+        size: root.height, root.height
+        allow_stretch: "True"
+        keep_ratio: "True"
 
 <TerminalSimulationWindow>:
-    id: TSW
     name: "TerminalSimulation"
 
     FloatLayout:
-        id: 2
+        # Title
+        BoxLayout:
+            size_hint_y: None
+            size_hint_x: None
+            height: TerminalSimulationTitle.height
+            width: TerminalSimulationTitle.width
+            pos: 0, root.height-self.height # Align top-left
+
+            Label:
+                id: TerminalSimulationTitle
+                text: "Terminal Simulation"
+                font_size: sp(20)
+                size: self.texture_size
+
+        # TODO: Remove this button once animatyion is automated
+        # Temporary button to trigger animation for testing
         Button:
-            id: otherExample
-            text: "Test 1"
+            text: "Start animation"
             size_hint: .25,.25
             on_release:
-                root.animationTest(self)
-
-        Button:
-            id: errorExample
-            text: "Test 2"
-            font_size: dp(30)
-            pos: 200, 200
-            size_hint: .25,.25
-            on_release:
-                root.animationTestt(root)
-
-        SimulatedWorker:
-            id: 4
-
-        
+                root.animate(1, 400, 400)
+            pos: 100, 100

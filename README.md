@@ -22,6 +22,10 @@ The system for our CS 3354 Systems Engineering Course
 6. Switch to your branch with 
    > git checkout *branch*
 
+## Changing Python version used
+1. Change python version in /PipFile
+2. Run > pipenv --python *version*
+
 ## Update Development Environment
    Install dependencies
    > pipenv install --dev
