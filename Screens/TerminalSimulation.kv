@@ -5,25 +5,27 @@
 #   Definition of the GUI for simulation of a terminal
 
 <TerminalSimulatedPlane>:
-    
-    canvas: 
-        # Color Only needed for testing. It shows the scaling of image relative to the root widget
-        Color:
-            rgba: 0, 0, 1, 1    # Blue
-        Rotate:
-            angle: root.animAngle
-        Rectangle:
-            pos: self.pos
-            size: self.size
-
     size_hint: .1, .1
     animAngle: 0
 
     Image: 
+        canvas.before: 
+            PushMatrix
+            # Color Only needed for testing. It shows the scaling of image relative to the root widget
+            Color:
+                rgba: 0, 0, 1, 1    # Blue
+            Rotate:
+                angle: root.animAngle
+                origin: self.center
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        canvas.after:
+            PopMatrix
         source: "./resources/images/GoogleAirplane.png"
         pos: root.pos
         size: root.height, root.height
-        allow_stretch: "True"
+        allow_stretch: True
         keep_ratio: "True"
 
 <TerminalSimulationWindow>:
@@ -50,5 +52,17 @@
             text: "Start animation"
             size_hint: .25,.25
             on_release:
-                root.animate(1, 400, 400)
-            pos: 100, 100
+                root.animate(0, 500, 400, 45)
+            pos: 600, 600
+        Button:
+            text: "Start animation"
+            size_hint: .25,.25
+            on_release:
+                root.animate(0, 600, 100, 45)
+            pos: 100, 600
+        Button:
+            text: "Start animation"
+            size_hint: .25,.25
+            on_release:
+                root.animate(0, 100, 500, 45)
+            pos: 800, 600

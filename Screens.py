@@ -8,16 +8,19 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.clock import Clock
 from kivy.app import App
 from kivy.lang import Builder
+#from kivy.uix.image import Image
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
-from kivy.uix.label import Label
+#from kivy.uix.label import Label
 from kivy.properties import NumericProperty
 from kivy.properties import StringProperty
 from kivy.animation import Animation
 from kivy.uix.widget import Widget
 from kivy.uix.floatlayout import FloatLayout
 from kivy.core.window import Window
+from kivy.uix import *
+import math
 import MasterLogAccess
-import weakref
+
 
 # Set window size
 Window.size = (1280, 720)
@@ -156,10 +159,10 @@ class TerminalSimulationWindow(Screen):
     def initializePlanes(self):
         # Figure out the number of planes in the simulation
         # TODO: make a query to determine number of planes
-        for x in range(0, 5):
+        for x in range(0, 1):
             newPlane = TerminalSimulatedPlane()
             # TODO: Make a query to determine the initial position of each plane
-            newPlane.pos = (randint(0,300), randint(0,300))
+            newPlane.pos = (randint(200,200), randint(200,200))
             self.planes.append(newPlane)
             self.add_widget(self.planes[len(self.planes)-1])
 
@@ -167,10 +170,23 @@ class TerminalSimulationWindow(Screen):
     #   wIndex - String - The index of the widget to animate          
     #   destX - Num - The x position to animate to
     #   destY - Num - The y position to animate to
-    def animate(self, wIndex, destX, destY, **kwargs): 
-        anim = Animation(x= destX, y = destY, duration=1, animAngle=90)
-        for p in self.planes:
-            anim.start(self.planes[wIndex])
+    #   angleOffset - Num - The offset of the calcuated angle to animate to. 
+    #       Default if 0 offset. 
+    #       angleOffset should be 45 for GoogleAirplane.png
+    def animate(self, wIndex, destX, destY, angleOffset=0, **kwargs):
+
+        # Calculate angleOffset
+        if (destY - self.planes[wIndex].pos[1]) < 1:
+            angleOffset -= 180
+        atan = math.atan((destX  - self.planes[wIndex].pos[0]) / (destY - self.planes[wIndex].pos[1]))
+        deg = atan * 180 / math.pi
+        deg = deg * -1
+        addedOffset = deg + angleOffset
+        angle = addedOffset
+
+        # Create and start animation
+        anim = Animation(animAngle=angle, duration=.2) + Animation(x= destX, y = destY, duration=1)
+        anim.start(self.planes[wIndex])
                 
 
 
