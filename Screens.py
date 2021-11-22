@@ -5,7 +5,11 @@
 #again, other comment about how they work can be found on a different branch (check Noah's branch)
 #he should also have implement more buttons
 from kivy.metrics import dp
+<<<<<<< Updated upstream
 from kivy.uix.screenmanager import ScreenManager, Screen
+=======
+from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
+>>>>>>> Stashed changes
 from kivy.uix.boxlayout import BoxLayout
 from kivy.clock import Clock
 from kivy.app import App
@@ -14,6 +18,7 @@ from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.label import Label
 from kivy.properties import NumericProperty, ObjectProperty
 from kivy.properties import StringProperty
+<<<<<<< Updated upstream
 
 #class to change between screens
 from kivy.uix.widget import Widget
@@ -29,6 +34,89 @@ class RadarWindow(Screen):
 
 class Plane(Widget):
     pass
+=======
+from kivy.animation import Animation
+
+from kivy.uix.widget import Widget
+
+#this variable is so that animation does not start until a certain sceen in on
+startMoving = False
+
+#this class is to change between screens
+class WindowManager(ScreenManager):
+    login = ObjectProperty(None)
+    mainMenu = ObjectProperty(None)
+    radar = ObjectProperty(None)
+
+#this hos the code for the radar page
+class RadarWindow(Screen):
+
+    #these are the variable that corresponds with planes
+    global startMoving
+    plane1 = ObjectProperty(None)
+    plane2 = ObjectProperty(None)
+    plane3 = ObjectProperty(None)
+    plane4 = ObjectProperty(None)
+    label1 = ObjectProperty(None)
+    label2 = ObjectProperty(None)
+    label3 = ObjectProperty(None)
+    label4 = ObjectProperty(None)
+    planeInfo = ObjectProperty(None)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+        #update screen every .1 seconds
+        Clock.schedule_interval(self.update, 0.1)
+        
+    #the method for the animation
+    def update(self, dt):
+        #get current plan posistion
+        x1, y1 = self.plane1.pos
+        x2, y2 = self.plane2.pos
+        x3, y3 = self.plane3.pos
+        x4, y4 = self.plane4.pos
+        
+        #displaying plane infor
+        self.label1.text = "ID      : 000001\nPosition: " + str(int(x1)) + ", " + str(int(y1)) + " \nAirline : American Airlines" 
+        self.label2.text = "ID      : 000002\nPosition: " + str(int(x2)) + ", " + str(int(y2)) + " \nAirline : Delta" 
+        self.label3.text = "ID      : 000003\nPosition: " + str(int(x3)) + ", " + str(int(y3)) + " \nAirline : United" 
+        self.label4.text = "ID      : 000004\nPosition: " + str(int(x4)) + ", " + str(int(y4)) + " \nAirline : American Airlines" 
+
+        #pause movement until the radar screen is shown
+        if(startMoving):
+            #updating plan position
+            #this is for demonstation purposes
+            #if we had access to actual plane movement this is where it will go
+            self.plane1.pos = (x1 + 5, y1 + 5)
+            self.plane2.pos = (x2 - 5, y2 + 2)
+            self.plane3.pos = (x3, y3 + 5)
+            self.plane4.pos = (x4 + 5, y4)
+
+            #removing plane if it is out of bound of  radar
+            if(x1 > (self.width * 2/3) - dp(20) or x1 < 0 or y1 > self.height or y1 < 0):
+                self.planeInfo.remove_widget(self.label1)
+                self.remove_widget(self.plane1)
+                
+
+            if(x2 > (self.width * 2/3) - dp(20) or x2 < 0 or y2 > self.height or y2 < 0):
+                self.planeInfo.remove_widget(self.label2)
+                self.remove_widget(self.plane2)
+
+            if(x3 > (self.width * 2/3) - dp(20) or x3 < 0 or y1 > self.height or y3 < 0):
+                self.planeInfo.remove_widget(self.label3)
+                self.remove_widget(self.plane3)
+
+            if(x4 > (self.width * 2/3) - dp(10) or x4 < 0 or y4 > self.height or y4 < 0):
+                self.planeInfo.remove_widget(self.label4)
+                self.remove_widget(self.plane4)
+
+
+#class for plane
+class Plane(Widget):
+    pass
+
+>>>>>>> Stashed changes
 #this hold the code for the login page
 class LoginWindow(Screen):
     #ObjectPropert retrieve the text input from the .kv file
@@ -50,7 +138,11 @@ class LoginWindow(Screen):
         #this for loop checks if the username and password are in the account list
         for i, tuple in enumerate(self.account):
             if (tuple[0] == self.userSubmit.text and tuple[1] == self.passwordSubmit.text):
+<<<<<<< Updated upstream
                 valid = True;
+=======
+                valid = True
+>>>>>>> Stashed changes
 
         #if it is, set textSubmit to success and change to the main menu
         if valid:
@@ -62,7 +154,11 @@ class LoginWindow(Screen):
 
 
 class MainMenuWindow(Screen):
-    pass
+    def changeToRadar(self):
+        global startMoving
+        startMoving = True
+        self.manager.current = "radarScreen"
+        self.manager.transition = SlideTransition(direction='right', duration=.25)
 
 
 # Remove these two imports once PlaneInfoList.populate is implemented
