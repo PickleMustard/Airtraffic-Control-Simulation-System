@@ -6,8 +6,10 @@
 
 <MainMenuWindow>:
     name: "MainMenu"
-
+    padding: 20, 20, 20, 20
+    spacing: 10
     GridLayout:
+
         cols: 3
         rows: 3
 
@@ -26,8 +28,30 @@
                 root.manager.transition.direction = "left"
 
         Button:
-            text: "Terminal Simulation"
+            text: "Radar"
+            on_release: root.changeToRadar()
+                #app.root.current = "RadarScreen"
+                #root.manager.transition.direction = "left"
 
+        Button:
+            text: "Ground Crew"
+
+        Button:
+            text: "Terminal Simulation"
             on_release:
                 app.root.current = "TerminalSimulation"
                 root.manager.transition.direction = "left"
+
+        Button:
+            text: "Master Log"
+
+        Button:
+            text: "Incident Log"
+
+        Button:
+            text: "Logout"
+
+            on_release:
+                app.root.current = "loginScreen"
+                root.manager.transition.direction = "right"
+

@@ -6,8 +6,7 @@ The system for our CS 3354 Systems Engineering Course
 
 .kv files are "kivy" files, a file type specific to our front-end implementation
 
-<<<<<<< HEAD
-- main.py - *Contains the app definition, loads main.kv and Screens.py*
+- main.py - *Contains the app definition, loads main.kv*
 - main.kv  - *Loads individual screens and sets up window manager*
 - Screens.py - *Contains class defintions for screens*
 - Screens - *Contains .kv files that contain kivy widget defintions. Each file corresponds to a class in Screens.py*
@@ -47,6 +46,7 @@ The system for our CS 3354 Systems Engineering Course
 4. > git push origin *sourceBranch*:*destinationBranch*
 
 ## Kivy Instructions
+
 
 #Creating the Database
 To ensure the database is able to run, take these steps
