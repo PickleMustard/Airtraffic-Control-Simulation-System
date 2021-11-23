@@ -31,38 +31,30 @@
 <TerminalSimulationWindow>:
     name: "TerminalSimulation"
 
-    FloatLayout:
-        # Title
-        BoxLayout:
-            size_hint_y: None
-            size_hint_x: None
-            height: TerminalSimulationTitle.height
-            width: TerminalSimulationTitle.width
-            pos: 0, root.height-self.height # Align top-left
+    GridLayout:
+        rows: 2
 
-            Label:
-                id: TerminalSimulationTitle
-                text: "Terminal Simulation"
-                font_size: sp(20)
-                size: self.texture_size
+        TopBarLayout:
+            title_text: "Terminal Simulation"
 
-        # TODO: Remove this button once animatyion is automated
-        # Temporary button to trigger animation for testing
-        Button:
-            text: "Start animation"
-            size_hint: .25,.25
-            on_release:
-                root.animate(0, 500, 400, 45)
-            pos: 600, 600
-        Button:
-            text: "Start animation"
-            size_hint: .25,.25
-            on_release:
-                root.animate(0, 600, 100, 45)
-            pos: 100, 600
-        Button:
-            text: "Start animation"
-            size_hint: .25,.25
-            on_release:
-                root.animate(0, 100, 500, 45)
-            pos: 800, 600
+        FloatLayout:
+            # TODO: Remove this button once animatyion is automated
+            # Temporary button to trigger animation for testing
+            Button:
+                text: "Start animation"
+                size_hint: .25,.25
+                on_release:
+                    root.planeAnimate(0, 500, 400, 45)
+                pos: 600, 300
+            Button:
+                text: "Start animation"
+                size_hint: .25,.25
+                on_release:
+                    root.planeAnimate(0, 600, 100, 45)
+                pos: 100, 300
+            Button:
+                text: "Start animation"
+                size_hint: .25,.25
+                on_release:
+                    root.planeAnimate(0, 100, 500, 45)
+                pos: 800, 300

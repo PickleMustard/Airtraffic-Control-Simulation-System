@@ -1,0 +1,77 @@
+#:kivy 2.0.0
+
+# Communications.kv
+#   Definition of the GUI for simulation of a communications
+
+<CommunicationsWindow>:
+    name: "Communications"
+    GridLayout:
+        rows: 3
+
+        TopBarLayout:
+            title_text: "Communications"
+
+        GridLayout: 
+            canvas:
+                Color:
+                    rgba: 0.11372549, 0.11372549, 0.11372549, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            size_hint: 1, .07
+            cols: 3
+            spacing: dp(10)
+
+            padding: dp(4)
+
+            Label: 
+                font_size: dp(20)
+                text: "Channel"
+                size: self.texture_size
+            
+            Label: 
+                font_size: dp(20)
+                text: "Status"
+                size: self.texture_size
+
+        GridLayout:
+            canvas:
+                Color:
+                    rgba: 0.3, 0.3, 0.3, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            spacing: dp(10)
+            rows: 2
+
+            GridLayout: 
+                canvas.before:
+                    Color:
+                        rgba: 0.5, 0.5, 0.5, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                size_hint: 1, .1
+                cols: 2
+
+                Label: 
+                    text: "1"
+                
+                Label:
+                    canvas:
+                        Color:
+                            rgba: 0, .75, 0, 1
+                        RoundedRectangle:
+                            size: self.size
+                            pos: self.pos
+                            radius: [400,]
+                    text: ''
+
+
+
+
+
+
+

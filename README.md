@@ -1,6 +1,19 @@
+- [Airtraffic-Control-Simulation-System](#airtraffic-control-simulation-system)
+  - [Project Structure](#project-structure)
+  - [Setup](#setup)
+  - [Changing Python version used](#changing-python-version-used)
+  - [Update Development Environment](#update-development-environment)
+  - [Basic Git Instructions](#basic-git-instructions)
+    - [Pull Updates](#pull-updates)
+    - [Update YOUR branch](#update-your-branch)
+    - [Push to a different branch](#push-to-a-different-branch)
+  - [Kivy Instructions](#kivy-instructions)
+    - [Run the app](#run-the-app)
+
 # Airtraffic-Control-Simulation-System
 
 The system for our CS 3354 Systems Engineering Course
+
 
 ## Project Structure
 
