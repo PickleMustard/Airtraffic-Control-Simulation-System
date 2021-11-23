@@ -1,10 +1,9 @@
 #:kivy 2.0.0
 
-# TerminalSimulation.kv
-# Description:
-#   Definition of the GUI for simulation of a terminal
+# GroundCrewSimulation.kv
+#   Definition of the GUI for simulation of the ground crew
 
-<TerminalSimulatedPlane>:
+<GroundCrewSimulatedWorker>:
     size_hint: .1, .1
     animAngle: 0
 
@@ -28,14 +27,52 @@
         allow_stretch: True
         keep_ratio: "True"
 
-<TerminalSimulationWindow>:
-    name: "TerminalSimulation"
+<GroundCrewSimulationWindow>:
+    name: "GroundCrewSimulation"
 
     GridLayout:
         rows: 2
 
         TopBarLayout:
-            title_text: "Terminal Simulation"
+            title_text: "Ground Crew Simulation"
+
+        GridLayout: 
+            canvas:
+                Color:
+                    rgba: 0.4, 0.4, 0.4, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            size_hint: 1, .07
+            cols: 3
+            spacing: dp(10)
+
+            padding: dp(4)
+
+            Button:
+                text: "Engineering checks"
+                #on_release: 
+            
+            Button:
+                text: "Extend Gate"
+                #on_release:
+
+            Button:
+                text: "Extend Gate"
+                #on_release:
+
+            Button:
+                text: "Extend Gate"
+                #on_release:
+
+            Button:
+                text: "Extend Gate"
+                #on_release:
+
+            Button:
+                text: "Extend Gate"
+                #on_release:
 
         FloatLayout:
             # TODO: Remove this button once animatyion is automated

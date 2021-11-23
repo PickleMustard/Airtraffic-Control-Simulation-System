@@ -1,0 +1,103 @@
+#:kivy 2.0.0
+
+# IncidentLog.kv
+# Description:
+#   Definition of GUI for display of the incident log
+
+<IncidentLogWindow>:
+    name: "IncidentLog"
+
+    GridLayout: 
+        rows: 3
+
+        # Title
+        TopBarLayout:
+            title_text: "Incident Log"
+
+        # Fields
+        BoxLayout:
+            canvas:
+                Color:
+                    rgba: 0.11372549, 0.11372549, 0.11372549, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            orientation: 'horizontal'
+            size_hint: 1, .05
+            cols: 10
+            padding: dp(10), 0, dp(10), 0
+
+            # datetime
+            BoxLayout:
+                orientation: 'vertical'
+                Label: 
+                    font_size: dp(20)
+                    text: "Datetime"
+                    size: self.texture_size
+
+            # Code
+            BoxLayout:
+                orientation: 'vertical'
+                Label: 
+                    font_size: dp(20)
+                    text: "Code"
+                    size: self.texture_size
+
+            # note
+            BoxLayout:
+                orientation: 'vertical'
+                Label: 
+                    font_size: dp(20)
+                    text: "Note"
+                    size: self.texture_size
+
+        # Master Log List
+        IncidentLogList:
+            id: IncidentLogList
+
+
+<IncidentLogRow>:
+    canvas.before:
+        Color:
+            rgba: 0.5, 0.5, 0.5, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    datetime: ''
+    code: ''
+    note: ''
+    
+    Label:
+        text: root.datetime
+    Label: 
+        text: root.code
+    Label:
+        text: root.note
+
+<IncidentLogList>:
+    canvas:
+        Color:
+            rgba: 0.3, 0.3, 0.3, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    rv: InfoList
+    GridLayout:
+        rows: 1
+        padding: dp(8)
+        spacing: dp(8)
+
+        RecycleView:
+            id: InfoList
+            scroll_type: ['bars', 'content']
+            scroll_wheel_distance: dp(118)
+#           bar_width: dp(20)
+            viewclass: 'IncidentLogRow'
+            RecycleBoxLayout:
+                default_size: None, dp(56)
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+                orientation: 'vertical'
+                spacing: dp(2)

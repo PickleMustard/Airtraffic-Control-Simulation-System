@@ -5,7 +5,6 @@
 #   Definition of the GUI for the view of the schedule.
 #   It contains the list of arrivals and departures
 
-
 <ArrivalRow>:
     canvas.before:
         Color:
@@ -37,15 +36,18 @@
 
 <ScheduleWindow>:
     name: "Schedule"
-
-    Button:
-        test: "HELLO"
-
+    
     GridLayout:
-        cols: 2
+        rows: 2
 
-        ArrivalList: 
-        DepartureList:
+        TopBarLayout:
+            title_text: "Schedule"
+
+        GridLayout:
+            cols: 2
+
+            ArrivalList: 
+            DepartureList:
 
 <ArrivalList>:
     canvas:

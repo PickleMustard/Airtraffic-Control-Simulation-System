@@ -1,6 +1,19 @@
+- [Airtraffic-Control-Simulation-System](#airtraffic-control-simulation-system)
+  - [Project Structure](#project-structure)
+  - [Setup](#setup)
+  - [Changing Python version used](#changing-python-version-used)
+  - [Update Development Environment](#update-development-environment)
+  - [Basic Git Instructions](#basic-git-instructions)
+    - [Pull Updates](#pull-updates)
+    - [Update YOUR branch](#update-your-branch)
+    - [Push to a different branch](#push-to-a-different-branch)
+  - [Kivy Instructions](#kivy-instructions)
+    - [Run the app](#run-the-app)
+
 # Airtraffic-Control-Simulation-System
 
 The system for our CS 3354 Systems Engineering Course
+
 
 ## Project Structure
 
@@ -21,6 +34,10 @@ The system for our CS 3354 Systems Engineering Course
 5. > pipenv install --dev
 6. Switch to your branch with 
    > git checkout *branch*
+
+## Changing Python version used
+1. Change python version in /PipFile
+2. Run > pipenv --python *version*
 
 ## Update Development Environment
    Install dependencies
@@ -46,7 +63,6 @@ The system for our CS 3354 Systems Engineering Course
 4. > git push origin *sourceBranch*:*destinationBranch*
 
 ## Kivy Instructions
-
 
 #Creating the Database
 To ensure the database is able to run, take these steps

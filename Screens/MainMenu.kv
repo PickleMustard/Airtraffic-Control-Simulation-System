@@ -34,9 +34,6 @@
                 #root.manager.transition.direction = "left"
 
         Button:
-            text: "Ground Crew"
-
-        Button:
             text: "Terminal Simulation"
             on_release:
                 app.root.current = "TerminalSimulation"
@@ -45,8 +42,30 @@
         Button:
             text: "Master Log"
 
+            on_release:
+                app.root.current = "MasterLog"
+                root.manager.transition.direction = "left"
+
         Button:
             text: "Incident Log"
+
+            on_release:
+                app.root.current = "IncidentLog"
+                root.manager.transition.direction = "left"
+
+        Button:
+            text: "Ground Crew Simulation"
+
+            on_release:
+                app.root.current = "GroundCrewSimulation"
+                root.manager.transition.direction = "left"
+
+        Button:
+            text: "Communications"
+
+            on_release:
+                app.root.current = "Communications"
+                root.manager.transition.direction = "left"
 
         Button:
             text: "Logout"
@@ -54,4 +73,3 @@
             on_release:
                 app.root.current = "loginScreen"
                 root.manager.transition.direction = "right"
-
