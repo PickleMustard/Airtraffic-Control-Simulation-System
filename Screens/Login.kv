@@ -6,6 +6,9 @@
 
 <LoginWindow>:
     name: "Login"
+    userSubmit: User
+    passwordSubmit: Password
+
 
     GridLayout:
         cols:1
@@ -14,14 +17,24 @@
             cols: 2
 
             Label:
+
+                text: "Username: "
+
+            TextInput:
+                id: User
+                multiline: False
+
+            Label:
                 text: "Password: "
 
             TextInput:
-                id: passw
+                id:Password
                 multiline: False
 
+        Label:
+            text: root.textSubmit
+
+        #pressing the button will call a function in the Screens.py file called onSubmit
         Button:
             text: "Submit"
-            on_release:
-                app.root.current = "MainMenu"
-                root.manager.transition.direction = "left"
+            on_release: root.onSubmit()
