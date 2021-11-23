@@ -1,11 +1,4 @@
 #:kivy 2.0.0
-<<<<<<< Updated upstream
-
-#simple radar mock up
-<RadarWindow>:
-    name: "RadarScreen"
-
-=======
 #:import Factory kivy.factory.Factory
 
 #this is for demonstration only
@@ -14,7 +7,7 @@
 <MyPopup@Popup>:
 
     auto_dismiss: False
-    size_hint: None, None,
+    size_hint: None, None
     size: 300, 200
     pos: root.center_x - 150, root.center_y - 100
 
@@ -24,14 +17,13 @@
 
         orientation: "vertical"
         Label:
-            text: "Bad Weather Warning"
+            text: "Bad Weather Warning\nPilots notified"
             color: 1, 0, 0, 1
         Label:
         Button:
-
             text: "Ok"
             on_release: root.dismiss()
-
+    
 #simple radar mock up
 <RadarWindow>:
     name: "radarScreen"
@@ -47,42 +39,28 @@
     planeInfo: PlaneInfo
 
     #show radar
->>>>>>> Stashed changes
     canvas.before:
         Rectangle:
             pos: 0,0
             size: root.width * 2 / 3, self.height
             source: "radarPic.png"
 
-<<<<<<< Updated upstream
-=======
     #create lines for visual purposes
->>>>>>> Stashed changes
     canvas:
         Color:
             rgb: 244/255, 243/255, 238/255, 1
         Rectangle:
-<<<<<<< Updated upstream
-            pos: root.width * 2 / 3, 0
-            size: 5, self.height
-
-        Rectangle:
-            pos: root.width * 2 / 3, (root.height - 50) * 9 / 40
-=======
             pos: root.width * 2 / 3 - 5, 0
             size: 5, self.height
 
         Rectangle:
             pos: root.width * 2 / 3, (root.height) * 7.3 / 40
->>>>>>> Stashed changes
             size: root.width / 3, 5
 
         Rectangle:
             pos: root.width * 2 /3, root.height - 50
             size: root.width / 3, 5
 
-<<<<<<< Updated upstream
-=======
     #initialize the planes on the radar
     Plane:
         id: planeA
@@ -98,20 +76,16 @@
 
     Plane:
         id: planeD
-        pos: root.width * .5, root.height * 0.45
+        pos: 0, root.height * 0.35
     
 
->>>>>>> Stashed changes
 
     BoxLayout:
         Widget:
             size_hint_x: None
             width: root.width * 2 / 3
 
-<<<<<<< Updated upstream
-=======
         #this will hold the plane info
->>>>>>> Stashed changes
         BoxLayout:
             orientation: "vertical"
 
@@ -121,12 +95,6 @@
                 size_hint_y: None
                 height: 50
             BoxLayout:
-<<<<<<< Updated upstream
-                size_hint_y: None
-                height: root.height * 29 / 40
-                orientation: "vertical"
-
-=======
                 id: PlaneInfo
                 size_hint_y: None
                 height: root.height * 29 / 40
@@ -213,31 +181,18 @@
                 
 
             #this is for bad weather demostration and to go back to main menu
->>>>>>> Stashed changes
             BoxLayout:
                 spacing: 30
                 padding: 20, 20, 20, 20
                 Button:
                     text: "Bad Weather"
-<<<<<<< Updated upstream
-=======
                     on_release: Factory.MyPopup().open()
->>>>>>> Stashed changes
                 Button:
                     text: "Main Menu"
                     on_release:
                         app.root.current = "menuScreen"
                         root.manager.transition.direction = "right"
 
-<<<<<<< Updated upstream
-<Plane>:
-    id: plane
-
-    Color:
-        rgb: 1, 0 ,0, 1
-        Ellipse:
-            size: dp(20), dp(20)
-=======
 #this is the illustration of the planes
 <Plane@Widget>:
 
@@ -249,4 +204,3 @@
             size: dp(20), dp(20)
             pos: self.pos
 
->>>>>>> Stashed changes

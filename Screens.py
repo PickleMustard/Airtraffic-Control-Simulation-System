@@ -5,42 +5,24 @@
 #again, other comment about how they work can be found on a different branch (check Noah's branch)
 #he should also have implement more buttons
 from kivy.metrics import dp
-<<<<<<< Updated upstream
-from kivy.uix.screenmanager import ScreenManager, Screen
-=======
 from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
->>>>>>> Stashed changes
 from kivy.uix.boxlayout import BoxLayout
 from kivy.clock import Clock
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.label import Label
+from kivy.uix.popup import Popup
 from kivy.properties import NumericProperty, ObjectProperty
 from kivy.properties import StringProperty
-<<<<<<< Updated upstream
-
-#class to change between screens
-from kivy.uix.widget import Widget
-
-
-class WindowManager(ScreenManager):
-    login = ObjectProperty(None)
-    mainMenu = ObjectProperty(None)
-
-#this hos the code for the radar page
-class RadarWindow(Screen):
-    planes = [ObjectProperty(None), ObjectProperty(None), ObjectProperty(None), ObjectProperty(None)]
-
-class Plane(Widget):
-    pass
-=======
 from kivy.animation import Animation
-
+from kivy.uix.button import Button
 from kivy.uix.widget import Widget
+from kivy.config import Config
 
 #this variable is so that animation does not start until a certain sceen in on
 startMoving = False
+
 
 #this class is to change between screens
 class WindowManager(ScreenManager):
@@ -63,6 +45,8 @@ class RadarWindow(Screen):
     label4 = ObjectProperty(None)
     planeInfo = ObjectProperty(None)
 
+    
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -78,10 +62,10 @@ class RadarWindow(Screen):
         x4, y4 = self.plane4.pos
         
         #displaying plane infor
-        self.label1.text = "ID      : 000001\nPosition: " + str(int(x1)) + ", " + str(int(y1)) + " \nAirline : American Airlines" 
-        self.label2.text = "ID      : 000002\nPosition: " + str(int(x2)) + ", " + str(int(y2)) + " \nAirline : Delta" 
-        self.label3.text = "ID      : 000003\nPosition: " + str(int(x3)) + ", " + str(int(y3)) + " \nAirline : United" 
-        self.label4.text = "ID      : 000004\nPosition: " + str(int(x4)) + ", " + str(int(y4)) + " \nAirline : American Airlines" 
+        self.label1.text = "ID               : 000001\nPosition     : " + str(int(x1)) + ", " + str(int(y1)) + " \nAirline        : American Airlines\nStatus        : Good" 
+        self.label2.text = "ID               : 000002\nPosition     : " + str(int(x2)) + ", " + str(int(y2)) + " \nAirline        : Delta Airlines\nStatus        : Good"  
+        self.label3.text = "ID               : 000003\nPosition     : " + str(int(x3)) + ", " + str(int(y3)) + " \nAirline        : United Airlines\nStatus        : Good"  
+        self.label4.text = "ID               : 000004\nPosition     : " + str(int(x4)) + ", " + str(int(y4)) + " \nAirline        : American Airlines\nStatus        : Approaching" 
 
         #pause movement until the radar screen is shown
         if(startMoving):
@@ -91,7 +75,10 @@ class RadarWindow(Screen):
             self.plane1.pos = (x1 + 5, y1 + 5)
             self.plane2.pos = (x2 - 5, y2 + 2)
             self.plane3.pos = (x3, y3 + 5)
-            self.plane4.pos = (x4 + 5, y4)
+            
+
+            if(x4 < dp(400)):
+                self.plane4.pos = (x4 + 5, y4)
 
             #removing plane if it is out of bound of  radar
             if(x1 > (self.width * 2/3) - dp(20) or x1 < 0 or y1 > self.height or y1 < 0):
@@ -107,16 +94,14 @@ class RadarWindow(Screen):
                 self.planeInfo.remove_widget(self.label3)
                 self.remove_widget(self.plane3)
 
-            if(x4 > (self.width * 2/3) - dp(10) or x4 < 0 or y4 > self.height or y4 < 0):
+            if(x4 > (self.width * 2/3) - dp(10) or y4 > self.height or y4 < 0):
                 self.planeInfo.remove_widget(self.label4)
                 self.remove_widget(self.plane4)
-
 
 #class for plane
 class Plane(Widget):
     pass
 
->>>>>>> Stashed changes
 #this hold the code for the login page
 class LoginWindow(Screen):
     #ObjectPropert retrieve the text input from the .kv file
@@ -138,11 +123,7 @@ class LoginWindow(Screen):
         #this for loop checks if the username and password are in the account list
         for i, tuple in enumerate(self.account):
             if (tuple[0] == self.userSubmit.text and tuple[1] == self.passwordSubmit.text):
-<<<<<<< Updated upstream
-                valid = True;
-=======
                 valid = True
->>>>>>> Stashed changes
 
         #if it is, set textSubmit to success and change to the main menu
         if valid:
