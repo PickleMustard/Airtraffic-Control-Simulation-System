@@ -3,12 +3,7 @@
 #   Contains the definitions for classes for the associated widgets in every screen
 #   This file will be split into files for each screen in the future
 
-# This code only have comments on the Login page as that is what I have wrote
-# Other comments about the code can be found on someone elses branch
 # When trying to login use "Admin1" for username and "Test1234" for the password
-# My verson only 3 buttons work on the main menu Schedule, Plane Info, and Logout
-# again, other comment about how they work can be found on a different branch (check Noah's branch)
-# he should also have implement more buttons
 
 from kivy.metrics import dp
 from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
@@ -35,10 +30,7 @@ from kivy.uix import *
 from datetime import datetime, timedelta
 import math
 import MasterLogAccess
-# TODO: Remove these two imports once PlaneInfoList.populate is implemented
-from random import sample, randint
-from string import ascii_lowercase
-
+from random import randint
 
 # Set window size
 Window.size = (1280, 720)
