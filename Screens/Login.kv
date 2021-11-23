@@ -1,9 +1,14 @@
 #:kivy 2.0.0
 
-#simple mockup login page
+# Login.kv
+# Description:
+#   Definition of the GUI of the login screen 
+
 <LoginWindow>:
+    name: "Login"
     userSubmit: User
     passwordSubmit: Password
+
 
     GridLayout:
         cols:1
@@ -12,6 +17,7 @@
             cols: 2
 
             Label:
+
                 text: "Username: "
 
             TextInput:
@@ -32,5 +38,3 @@
         Button:
             text: "Submit"
             on_release: root.onSubmit()
-
-

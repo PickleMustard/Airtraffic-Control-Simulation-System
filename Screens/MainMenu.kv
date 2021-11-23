@@ -1,10 +1,15 @@
-#Only button that works at the moment includes: Schedule, Plane Info, and Logout
 #:kivy 2.0.0
 
+# MainMenu.kv
+# Description:
+#   Definition of the GUI for the main menu
+
 <MainMenuWindow>:
+    name: "MainMenu"
+    padding: 20, 20, 20, 20
+    spacing: 10
     GridLayout:
-        padding: 20, 20, 20, 20
-        spacing: 10
+
         cols: 3
         rows: 3
 
@@ -33,6 +38,9 @@
 
         Button:
             text: "Terminal Simulation"
+            on_release:
+                app.root.current = "TerminalSimulation"
+                root.manager.transition.direction = "left"
 
         Button:
             text: "Master Log"
@@ -46,3 +54,4 @@
             on_release:
                 app.root.current = "loginScreen"
                 root.manager.transition.direction = "right"
+

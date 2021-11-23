@@ -1,18 +1,39 @@
 #:kivy 2.0.0
 
-# Customize Recycleview Boxlayout
-<Row@RecycleKVIDsDataViewBehavior+BoxLayout>:
+# Schedule.kv
+# Description:
+#   Definition of the GUI for the view of the schedule.
+#   It contains the list of arrivals and departures
+
+
+<ArrivalRow>:
     canvas.before:
         Color:
             rgba: 0.5, 0.5, 0.5, 1
         Rectangle:
             size: self.size
             pos: self.pos
-    value: ''
+    planeName: ''
+    planeArrivalTime: ''
     Label:
-        id: name
+        text: root.planeName
     Label:
-        text: root.value
+        text: root.planeArrivalTime
+
+<DepartureRow>:
+    canvas.before:
+        Color:
+            rgba: 0.5, 0.5, 0.5, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    planeName: ''
+    planeDepartureTime: ''
+    Label:
+        text: root.planeName
+    Label:
+        text: root.planeDepartureTime
+
 
 <ScheduleWindow>:
     name: "Schedule"
@@ -48,7 +69,7 @@
             scroll_type: ['bars', 'content']
             scroll_wheel_distance: dp(118)
             bar_width: dp(14)
-            viewclass: 'Row'
+            viewclass: 'ArrivalRow'
             RecycleBoxLayout:
                 default_size: None, dp(56)
                 default_size_hint: 1, None
@@ -80,7 +101,7 @@
             scroll_type: ['bars', 'content']
             scroll_wheel_distance: dp(118)
             bar_width: dp(10)
-            viewclass: 'Row'
+            viewclass: 'DepartureRow'
             RecycleBoxLayout:
                 default_size: None, dp(56)
                 default_size_hint: 1, None
