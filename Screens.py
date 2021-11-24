@@ -479,6 +479,13 @@ class IncidentLogList(BoxLayout):
 # Yb  "88 88"Yb  Yb   dP Y8   8P 88 Y88  8I  dY     Yb      88"Yb  88""     YbdPYbdP       o.`Y8b 88 88YbdP88 
 #  YboodP 88  Yb  YbodP  `YbodP' 88  Y8 8888Y"       YboodP 88  Yb 888888    YP  YP        8bodP' 88 88 YY 88 
 
+class EngineeringCheckPopup(Popup):
+    pass
+
+class ExtendGatePopup(Popup):
+    pass
+
+
 class GroundCrewSimulationWindow (Screen):
     def engineeringCheck(self):
         h = self.ids.GroundCrewSimFloatLayout.height
@@ -498,6 +505,45 @@ class GroundCrewSimulationWindow (Screen):
 
         anim5 = Animation(x=w*.73, y=h*.29, duration=1)
         anim5.start(self.ids.worker5)
+
+        threading.Timer(3, self.createEngineeringCheckPopup).start()
+
+    def createEngineeringCheckPopup(self):
+        eCheckPopup = EngineeringCheckPopup(pos= (self.center_x - 150, self.center_y-100))
+        eCheckPopup.open()
+
+    def extendGate(self):
+        h = self.ids.GroundCrewSimFloatLayout.height
+        w = self.ids.GroundCrewSimFloatLayout.width
+
+        # Move Workers
+        anim1 = Animation(x=w*.02, y=h*.1, duration=1)
+        anim1.start(self.ids.worker1)
+
+        anim2 = Animation(x=w*.02, y=h*.15, duration=1)
+        anim2.start(self.ids.worker2)
+
+        anim3 = Animation(x=w*.02, y=h*.2, duration=1)
+        anim3.start(self.ids.worker3)
+
+        anim4 = Animation(x=w*.02, y=h*.25, duration=1)
+        anim4.start(self.ids.worker4)
+
+        anim5 = Animation(x=w*.02, y=h*.30, duration=1)
+        anim5.start(self.ids.worker5)
+
+
+        # Extend gate
+        gateAnim = Animation(size_hint=(.03, .27), duration=3)
+        gateAnim.start(self.ids.gate)
+
+        threading.Timer(3, self.createExtendGatePopup).start()
+
+    def createExtendGatePopup(self):
+        gPopup = ExtendGatePopup(pos= (self.center_x - 150, self.center_y-100))
+        gPopup.open()
+        
+    
 
 
 

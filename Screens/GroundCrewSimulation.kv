@@ -11,6 +11,43 @@
     allow_stretch: True
     keep_ratio: "True"
 
+<EngineeringCheckPopup@Popup>:
+
+    auto_dismiss: False
+    size_hint: None, None
+    size: 300, 200
+
+    title: "Engineering Check Completed"
+
+    BoxLayout:
+
+        orientation: "vertical"
+        Label:
+            text: "Engineering check completed\nPilots notified"
+            color: 1, 1, 1, 1
+        Label:
+        Button:
+            text: "Ok"
+            on_release: root.dismiss()
+
+<ExtendGatePopup@Popup>:
+
+    auto_dismiss: False
+    size_hint: None, None
+    size: 300, 200
+
+    title: "Gate Extended"
+
+    BoxLayout:
+
+        orientation: "vertical"
+        Label:
+            text: "Gate successfully extended"
+            color: 1, 1, 1, 1
+        Label:
+        Button:
+            text: "Ok"
+            on_release: root.dismiss()
 
 <GroundCrewSimulationWindow>:
     name: "GroundCrewSimulation"
@@ -41,23 +78,7 @@
             
             Button:
                 text: "Extend Gate"
-                #on_release:
-
-            Button:
-                text: "Extend Gate"
-                #on_release:
-
-            Button:
-                text: "Extend Gate"
-                #on_release:
-
-            Button:
-                text: "Extend Gate"
-                #on_release:
-
-            Button:
-                text: "Extend Gate"
-                #on_release:
+                on_release: root.extendGate()
 
         FloatLayout:
             canvas: 
@@ -92,6 +113,7 @@
 
             # Gate
             Label:
+                id: gate
                 canvas:
                     Color:
                         rgba: .3, .29, .31, 1 
@@ -100,7 +122,7 @@
                         size: self.size
                 x: GroundCrewSimFloatLayout.width * 0.7
                 y: 0 # GroundCrewSimFloatLayout.height * 0.5
-                size_hint: .03, .27
+                size_hint: .03, .10
 
             # Worker 1
             GroundCrewWorker:
