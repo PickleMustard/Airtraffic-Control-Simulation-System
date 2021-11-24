@@ -61,11 +61,11 @@
         rows: 2
         padding: dp(8)
 
-        Button:
-            text: 'Populate Arrivals'
-            font_size: sp(12)
+        Label:
+            text: 'Arrivals'
+            font_size: sp(20)
             size_hint: 1, .1
-            on_press: root.populate()
+
         RecycleView:
             id: Arrivals
             scroll_type: ['bars', 'content']
@@ -93,11 +93,11 @@
         rows: 2
         padding: dp(8)
 
-        Button:
-            text: 'Populate Departures'
-            font_size: sp(12)
+        Label:
+            text: 'Departures'
+            font_size: sp(20)
             size_hint: 1, .1
-            on_press: root.populate()
+
         RecycleView:
             id: Departures
             scroll_type: ['bars', 'content']

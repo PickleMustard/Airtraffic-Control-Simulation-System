@@ -3,14 +3,52 @@
 # Communications.kv
 #   Definition of the GUI for simulation of a communications
 
+<ChannelLabel@Label>:
+    text: ""
+    size: self.texture_size
+    font_size: dp(30)
+
+<ChannelRow>
+    canvas.before:
+        Color:
+            rgba: 0.5, 0.5, 0.5, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    channel_text: ""
+
+    size_hint_x: 1
+    size_hint_y: None
+    height: 100
+    rows: 1
+    cols: 2
+
+
+    # Channel name
+    ChannelLabel: 
+        text: root.channel_text
+
+    # Status "Light"
+    Widget:
+        canvas:
+            Color:
+                rgba: 0, .75, 0, 1
+            RoundedRectangle:
+                size: self.height/1.5, self.height/1.5
+                pos: self.center_x-self.height/3, self.center_y-self.height/3
+                radius: [400,]
+
+
 <CommunicationsWindow>:
     name: "Communications"
     GridLayout:
         rows: 3
 
+        # Title
         TopBarLayout:
             title_text: "Communications"
 
+        # Column headers
         GridLayout: 
             canvas:
                 Color:
@@ -35,43 +73,17 @@
                 text: "Status"
                 size: self.texture_size
 
+        # Channels
         GridLayout:
-            canvas:
-                Color:
-                    rgba: 0.3, 0.3, 0.3, 1
-                Rectangle:
-                    size: self.size
-                    pos: self.pos
-
+            cols: 1
+            rows: 3
             spacing: dp(10)
-            rows: 2
 
-            GridLayout: 
-                canvas.before:
-                    Color:
-                        rgba: 0.5, 0.5, 0.5, 1
-                    Rectangle:
-                        size: self.size
-                        pos: self.pos
-                size_hint: 1, .1
-                cols: 2
+            ChannelRow:
+                channel_text: "1"
 
-                Label: 
-                    text: "1"
-                
-                Label:
-                    canvas:
-                        Color:
-                            rgba: 0, .75, 0, 1
-                        RoundedRectangle:
-                            size: self.size
-                            pos: self.pos
-                            radius: [400,]
-                    text: ''
+            ChannelRow:
+                channel_text: "2"
 
-
-
-
-
-
-
+            ChannelRow:
+                channel_text: "3"

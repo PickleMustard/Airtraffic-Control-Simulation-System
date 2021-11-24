@@ -480,7 +480,26 @@ class IncidentLogList(BoxLayout):
 #  YboodP 88  Yb  YbodP  `YbodP' 88  Y8 8888Y"       YboodP 88  Yb 888888    YP  YP        8bodP' 88 88 YY 88 
 
 class GroundCrewSimulationWindow (Screen):
-    pass
+    def engineeringCheck(self):
+        h = self.ids.GroundCrewSimFloatLayout.height
+        w = self.ids.GroundCrewSimFloatLayout.width
+
+        anim1 = Animation(x=w*.68, y=h*.68, duration=1)
+        anim1.start(self.ids.worker1)
+
+        anim2 = Animation(x=w*.54, y=h*.33, duration=1)
+        anim2.start(self.ids.worker2)
+
+        anim3 = Animation(x=w*.65, y=h*.9, duration=1)
+        anim3.start(self.ids.worker3)
+
+        anim4 = Animation(x=w*.56, y=h*.54, duration=1)
+        anim4.start(self.ids.worker4)
+
+        anim5 = Animation(x=w*.73, y=h*.29, duration=1)
+        anim5.start(self.ids.worker5)
+
+
 
 
 #  dP""b8  dP"Yb  8b    d8 8b    d8 88   88 88b 88 88  dP""b8    db    888888 88  dP"Yb  88b 88 .dP"Y8 
@@ -492,7 +511,10 @@ class GroundCrewSimulationWindow (Screen):
 class CommunicationsWindow (Screen):
     pass
 
-
+class ChannelRow(GridLayout):
+    channel_text = StringProperty()
+    def __init__(self, **kwargs):
+        super(ChannelRow, self).__init__(**kwargs)
 
 
 
