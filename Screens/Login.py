@@ -37,9 +37,6 @@ class LoginWidget(Widget):
 
 
 
-
-
-
 class Login(App):
     pass
 
