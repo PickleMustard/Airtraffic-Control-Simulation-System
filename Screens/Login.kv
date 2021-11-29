@@ -5,19 +5,20 @@
 #   Definition of the GUI of the login screen 
 
 <LoginWindow>:
-    name: "Login"
     userSubmit: User
     passwordSubmit: Password
 
-
     GridLayout:
         cols:1
-
+        padding: [70, 50, 70, 50]
+        
+        Label:
+            text: "Login"
+            font_size: '50sp'
         GridLayout:
             cols: 2
-
+            spacing: '10dp'
             Label:
-
                 text: "Username: "
 
             TextInput:
@@ -30,9 +31,11 @@
             TextInput:
                 id:Password
                 multiline: False
+                password: True
 
         Label:
             text: root.textSubmit
+            color: 1, 0, 0, 1
 
         #pressing the button will call a function in the Screens.py file called onSubmit
         Button:

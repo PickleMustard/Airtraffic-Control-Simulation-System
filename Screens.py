@@ -160,8 +160,8 @@ class LoginWindow(Screen):
 
         #if it is, set textSubmit to success and change to the main menu
         if valid:
-            self.textSubmit = "Success"
             self.manager.current = "menuScreen"
+            self.textSubmit = ""
         #else display incorrect username or password message
         else:
             self.textSubmit = "Incorrect username or password."
