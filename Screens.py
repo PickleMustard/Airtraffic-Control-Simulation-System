@@ -36,6 +36,20 @@ from random import randint
 Window.size = (1280, 720)
 Window.minimum_width, Window.minimum_height = Window.size
 
+# Planes to use in th
+examplePlanes = [{
+    "id": "000001",
+    "airline": "American Airlines",
+    "gasUsage": (str(randint(90, 110)/100)), # in gal/s
+    "altitude": str(randint(39950, 40050)), # in mi
+    "expectedAltitude": 40000, # in mi
+    "weight": 91678, # in lbs
+    "weightCapacity": 100000, # in lbs
+    "runway": "Runway 1",
+    "dockingGate": "Gate 1",
+    "expectedRateOfDescent": 2000 # in ft/min
+}]
+
 # 888888 888888 8b    d8 88""Yb 88        db    888888 888888 .dP"Y8 
 #   88   88__   88b  d88 88__dP 88       dPYb     88   88__   `Ybo." 
 #   88   88""   88YbdP88 88"""  88  .o  dP__Yb    88   88""   o.`Y8b 
@@ -57,6 +71,11 @@ class WindowManager(ScreenManager):
     login = ObjectProperty(None)
     mainMenu = ObjectProperty(None)
     radar = ObjectProperty(None)
+
+# 88""Yb    db    8888b.     db    88""Yb 
+# 88__dP   dPYb    8I  Yb   dPYb   88__dP 
+# 88"Yb   dP__Yb   8I  dY  dP__Yb  88"Yb  
+# 88  Yb dP""""Yb 8888Y"  dP""""Yb 88  Yb 
 
 #this is the code for the radar page
 class RadarWindow(Screen):
@@ -112,7 +131,6 @@ class RadarWindow(Screen):
             if(x1 > (self.width * 2/3) - dp(20) or x1 < 0 or y1 > self.height or y1 < 0):
                 self.planeInfo.remove_widget(self.label1)
                 self.remove_widget(self.plane1)
-                
 
             if(x2 > (self.width * 2/3) - dp(20) or x2 < 0 or y2 > self.height or y2 < 0):
                 self.planeInfo.remove_widget(self.label2)
@@ -162,6 +180,8 @@ class LoginWindow(Screen):
         if valid:
             self.manager.current = "menuScreen"
             self.textSubmit = ""
+            self.ids.User.text = ""
+            self.ids.Password.text = ""
         #else display incorrect username or password message
         else:
             self.textSubmit = "Incorrect username or password."
@@ -186,6 +206,7 @@ class MainMenuWindow(Screen):
 
 # Class for PlaneInfoWindow root widget
 class PlaneInfoWindow(Screen):
+
     def search(self):
         # Getting the text values from text inputs
         searchKey = self.ids.PlaneInfoTextInput.text
@@ -199,6 +220,35 @@ class PlaneInfoWindow(Screen):
                                 'dataValue': str(x[1])})
         self.ids.PlaneInfoList.rv.data = newData
 
+    def getInfo(self):
+        planeInfoIDText = self.ids.PlaneInfoPlaneID.text
+
+        # Check for an invalid id
+        try: 
+            planeInfoID = int(planeInfoIDText)
+        except: 
+            self.ids.PlaneInfoPlaneIDGetInfoResult.text = "Invalid plane ID"
+            return
+
+        # Check for an invalid id
+        if planeInfoID < 0:
+            self.ids.PlaneInfoPlaneIDGetInfoResult.text = "Invalid plane ID"
+            return
+
+        # Reset result text if plane id is valid
+        self.ids.PlaneInfoPlaneIDGetInfoResult.text = ''
+        
+        # Search for a plane of the given id, populate list if found
+        for p in examplePlanes:
+            if int(p["id"]) == planeInfoID:
+                self.ids.PlaneInfoList.populate(p)
+                return
+        
+        # No plane found with the given id
+        self.ids.PlaneInfoPlaneIDGetInfoResult.text = "No plane foudn with ID: " + planeInfoIDText
+
+
+
 # Class for a row in the table of plane information in PlaneInfo Screen
 class PlaneInfoRow(RecycleDataViewBehavior,BoxLayout):
     dataName = StringProperty()
@@ -209,51 +259,66 @@ class PlaneInfoRow(RecycleDataViewBehavior,BoxLayout):
 # Class for the list of plane information in PlaneInfo Screen
 #   Autopopulates on the first clock
 class PlaneInfoList(BoxLayout):
+    currentPlaneInfoID = -1
     def __init__(self, **kwargs):
         global Log_access
         global data
         Log_access = MasterLogAccess.MasterLogAccess()
         super(PlaneInfoList, self).__init__(**kwargs)
-        Clock.schedule_once(self.finish_init,0)
+        #Clock.schedule_once(self.finish_init,0) # do not populate at start
 
     # Autopopulate list of plane info
     def finish_init(self, dt):
         self.populate()
 
     # Populate list of plane info from database
-    def populate(self):
+    def populate(self, plane):
         # query_result = Log_access.temporary_Info_List_Search()
-        # Temporary data
+        
+        self.currentPlaneInfoID = int(plane['id'])
+
+        # Given data
         query_result = [
-            ['Plane ID', '1'],
+            ['Plane ID', str(plane['id'])],
+            ['Airline', str(plane['airline'])],
+            # TODO: Update the object instead of this value
             ['Gas Usage', str(randint(90, 110)/100) + " gal/s"],
             ['Altitude', str(randint(39950, 40050)) + " mi"],
-            ['Expected Altitude', '40000 mi'],
-            ['Weight', '91,678 lbs'],
-            ['Runway', 'Runway 1'],
-            ['Docking Gate', 'Gate 1'],
-            ['Expected rate of descent', '2000 ft/min']
+            ['Expected Altitude', str(plane['expectedAltitude']) + " mi"],
+            ['Weight', str(plane['weight']) + " lbs"],
+            ['Weight Capacity', str(plane['weightCapacity']) + " lbs"],
+            ['Runway', str(plane['runway'])],
+            ['Docking Gate', str(plane['dockingGate'])],
+            ['Expected rate of descent', str(plane['expectedRateOfDescent']) + " ft/min"]
         ]
+
+        # Populate list with data values
         self.data = query_result
         self.rv.data = [{'dataName': str(x[0]),
         'dataValue': str(x[1])} for x in query_result]
 
+    def refresh(self):
+        # Check if id is not currently set
+        if self.currentPlaneInfoID < 0:
+            return
+
+        # Find plane with current id
+        for p in examplePlanes:
+            if int(p["id"]) == self.currentPlaneInfoID:
+                self.populate(p)
+                return
 
     def makeOverweight(self):
-        # Temporary data
-        query_result = [
-            ['Plane ID', '1'],
-            ['Gas Usage', "1 gal/s"],
-            ['Altitude',  "0 mi"],
-            ['Expected Altitude', '0 mi'],
-            ['Weight', "95,678 lbs"],
-            ['Runway', 'Runway 1'],
-            ['Docking Gate', 'Gate 1'],
-            ['Expected rate of descent', '2000 ft/min']
-        ]
-        self.data = query_result
-        self.rv.data = [{'dataName': str(x[0]),
-        'dataValue': str(x[1])} for x in query_result]
+        # Check if id is not currently set
+        if self.currentPlaneInfoID < 0:
+            return
+
+        # Find plane with current id
+        for p in examplePlanes:
+            if int(p["id"]) == self.currentPlaneInfoID:
+                p["weight"] = p["weightCapacity"] + randint(100, 500)
+        
+        self.refresh()
 
 # .dP"Y8  dP""b8 88  88 888888 8888b.  88   88 88     888888 
 # `Ybo." dP   `" 88  88 88__    8I  Yb 88   88 88     88__   

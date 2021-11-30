@@ -38,11 +38,49 @@
         TopBarLayout:
             title_text: "Plane Info"
 
-        # Search bar
+        # Input bar
+
+
+
         GridLayout:
             rows: 2
-            size_hint: 1, .07
+            size_hint: 1, .14
 
+            # Input
+            GridLayout: 
+                canvas:
+                    Color:
+                        rgba: 0.11372549, 0.11372549, 0.11372549, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+
+                size_hint: 1, .07
+                cols: 3
+                spacing: dp(10)
+                padding: dp(4)
+
+                Label: 
+                    text: "Plane ID: "
+                    font_size: dp(25)
+                    size: self.texture_size
+                    size_hint: .2, 1
+
+                TextInput:
+                    id: PlaneInfoPlaneID
+                    multiline: False
+                    font_size: dp(25)
+                    on_text_validate: root.getInfo()
+                
+                # Plane ID search result
+                Label: 
+                    id: PlaneInfoPlaneIDGetInfoResult
+                    text: ''
+                    font_size: dp(25)
+                    color: 1, 0, 0, 1
+
+
+            # Search bar
             GridLayout: 
                 canvas:
                     Color:
@@ -59,7 +97,7 @@
 
                 Button:
                     text: "Refresh"
-                    on_release: PlaneInfoList.populate()
+                    on_release: PlaneInfoList.refresh()
                 
                 Button:
                     text: "Make overweight"

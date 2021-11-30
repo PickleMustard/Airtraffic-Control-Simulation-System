@@ -21,7 +21,7 @@
                     pos: self.pos
 
             size_hint: 1, .08
-            cols: 2
+            cols: 1
             padding: dp(8)
 
             # Title
@@ -46,10 +46,11 @@
 
             cols: 3
             rows: 3
-            padding: dp(80)
+            padding: dp(150)
 
             Button:
                 text: "Schedule"
+                font_size: dp(35)
 
                 on_release:
                     app.root.current = "Schedule"
@@ -57,6 +58,7 @@
 
             Button:
                 text: "Plane Info"
+                font_size: dp(35)
 
                 on_release:
                     app.root.current = "PlaneInfo"
@@ -64,6 +66,8 @@
 
             Button:
                 text: "Radar"
+                font_size: dp(35)
+
                 on_release: root.changeToRadar()
                     #app.root.current = "RadarScreen"
                     #root.manager.transition.direction = "left"
@@ -76,6 +80,7 @@
 
             Button:
                 text: "Master Log"
+                font_size: dp(35)
 
                 on_release:
                     app.root.current = "MasterLog"
@@ -83,13 +88,15 @@
 
             Button:
                 text: "Incident Log"
+                font_size: dp(35)
 
                 on_release:
                     app.root.current = "IncidentLog"
                     root.manager.transition.direction = "left"
 
             Button:
-                text: "Ground Crew Simulation"
+                text: "Ground Crew Sim"
+                font_size: dp(35)
 
                 on_release:
                     app.root.current = "GroundCrewSimulation"
@@ -97,6 +104,7 @@
 
             Button:
                 text: "Communications"
+                font_size: dp(35)
 
                 on_release:
                     app.root.current = "Communications"
@@ -104,6 +112,7 @@
 
             Button:
                 text: "Logout"
+                font_size: dp(35)
 
                 on_release:
                     app.root.current = "loginScreen"

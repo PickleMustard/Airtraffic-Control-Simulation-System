@@ -20,18 +20,22 @@
             spacing: '10dp'
             Label:
                 text: "Username: "
+                font_size: dp(30)
 
             TextInput:
                 id: User
                 multiline: False
+                font_size: dp(20)
 
             Label:
                 text: "Password: "
+                font_size: dp(30)
 
             TextInput:
                 id:Password
                 multiline: False
                 password: True
+                font_size: dp(20)
 
         Label:
             text: root.textSubmit
@@ -41,3 +45,4 @@
         Button:
             text: "Submit"
             on_release: root.onSubmit()
+            font_size: 40
