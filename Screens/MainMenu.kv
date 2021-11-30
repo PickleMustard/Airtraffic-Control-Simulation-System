@@ -8,68 +8,103 @@
     name: "MainMenu"
     padding: 20, 20, 20, 20
     spacing: 10
+
     GridLayout:
+        rows: 2
 
-        cols: 3
-        rows: 3
+        GridLayout:
+            canvas:
+                Color:
+                    rgba: 0.4, 0.4, 0.4, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
 
-        Button:
-            text: "Schedule"
+            size_hint: 1, .08
+            cols: 2
+            padding: dp(8)
 
-            on_release:
-                app.root.current = "Schedule"
-                root.manager.transition.direction = "left"
+            # Title
+            AnchorLayout:
+                size_hint: .5, 1
+                anchor_x: 'left'
+                anchor_y: 'center'
 
-        Button:
-            text: "Plane Info"
+                Label:
+                    text: "Main Menu"
+                    color: 0, 0, 0, 1
+                    bold: True
+                    font_size: dp(35)
+                    max_lines: 1
+                    halign: 'left'
+                    valign: 'middle'
+                    text_size: self.size
+                    size_hint: 1, 1
+                    anchor_x: 'left'
 
-            on_release:
-                app.root.current = "PlaneInfo"
-                root.manager.transition.direction = "left"
+        GridLayout:
 
-        Button:
-            text: "Radar"
-            on_release: root.changeToRadar()
-                #app.root.current = "RadarScreen"
-                #root.manager.transition.direction = "left"
+            cols: 3
+            rows: 3
+            padding: dp(80)
 
-        Button:
-            text: "Terminal Simulation"
-            on_release:
-                app.root.current = "TerminalSimulation"
-                root.manager.transition.direction = "left"
+            Button:
+                text: "Schedule"
 
-        Button:
-            text: "Master Log"
+                on_release:
+                    app.root.current = "Schedule"
+                    root.manager.transition.direction = "left"
 
-            on_release:
-                app.root.current = "MasterLog"
-                root.manager.transition.direction = "left"
+            Button:
+                text: "Plane Info"
 
-        Button:
-            text: "Incident Log"
+                on_release:
+                    app.root.current = "PlaneInfo"
+                    root.manager.transition.direction = "left"
 
-            on_release:
-                app.root.current = "IncidentLog"
-                root.manager.transition.direction = "left"
+            Button:
+                text: "Radar"
+                on_release: root.changeToRadar()
+                    #app.root.current = "RadarScreen"
+                    #root.manager.transition.direction = "left"
 
-        Button:
-            text: "Ground Crew Simulation"
+            #Button:
+            #    text: "Terminal Simulation"
+            #    on_release:
+            #        app.root.current = "TerminalSimulation"
+            #        root.manager.transition.direction = "left"
 
-            on_release:
-                app.root.current = "GroundCrewSimulation"
-                root.manager.transition.direction = "left"
+            Button:
+                text: "Master Log"
 
-        Button:
-            text: "Communications"
+                on_release:
+                    app.root.current = "MasterLog"
+                    root.manager.transition.direction = "left"
 
-            on_release:
-                app.root.current = "Communications"
-                root.manager.transition.direction = "left"
+            Button:
+                text: "Incident Log"
 
-        Button:
-            text: "Logout"
+                on_release:
+                    app.root.current = "IncidentLog"
+                    root.manager.transition.direction = "left"
 
-            on_release:
-                app.root.current = "loginScreen"
-                root.manager.transition.direction = "right"
+            Button:
+                text: "Ground Crew Simulation"
+
+                on_release:
+                    app.root.current = "GroundCrewSimulation"
+                    root.manager.transition.direction = "left"
+
+            Button:
+                text: "Communications"
+
+                on_release:
+                    app.root.current = "Communications"
+                    root.manager.transition.direction = "left"
+
+            Button:
+                text: "Logout"
+
+                on_release:
+                    app.root.current = "loginScreen"
+                    root.manager.transition.direction = "right"
