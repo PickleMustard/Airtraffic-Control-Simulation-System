@@ -35,6 +35,8 @@
     label2: labelB
     label3: labelC
     label4: labelD
+    filler: filler
+    separator: separator
 
     planeInfo: PlaneInfo
 
@@ -43,7 +45,7 @@
         Rectangle:
             pos: 0,0
             size: root.width * 2 / 3, self.height
-            source: "./resources/images/radarPic.png"
+            source: "radarPic.png"
 
     #create lines for visual purposes
     canvas:
@@ -76,7 +78,7 @@
 
     Plane:
         id: planeD
-        pos: 0, root.height * 0.35
+        pos: -50, root.height * 0.35
     
 
 
@@ -164,6 +166,7 @@
                             pos: self.pos
                             size: self.size
                 Label:
+                    id: separator
                     size_hint_y: None
                     height: 1
                     canvas:
@@ -172,6 +175,7 @@
                             size: self.size
                         
                 Widget:
+                    id: filler
                     canvas:
                         Color:
                             rgba: 0, 0, 0, 1
