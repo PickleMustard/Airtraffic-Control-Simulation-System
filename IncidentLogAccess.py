@@ -7,7 +7,7 @@ class IncidentLogAccess():
         global IncidentLog
         IncidentLog = mysql.connector.connect(
             host="localhost",
-            user="root",
+            user="user",
             password="password",
             database="Incident_Log"
         )
@@ -24,6 +24,8 @@ class IncidentLogAccess():
         sql = "INSERT INTO logs (date, code, notes) VALUES ( NOW(), %s, %s)"
         val = (code, notes)
         IncidentLogCursor.execute(sql, val)
+        IncidentLog.commit()
+        print(IncidentLogCursor.lastrowid)
     
     def get_Incident_Logs(self):
         sql = "SELECT date, code, notes FROM logs"

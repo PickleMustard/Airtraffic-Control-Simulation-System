@@ -8,6 +8,12 @@
     name: "MainMenu"
     padding: 20, 20, 20, 20
     spacing: 10
+    canvas.before:
+        Color:
+            rgba: 0.3922, 0.4314, 0.4078, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
 
     GridLayout:
         rows: 2
@@ -15,7 +21,7 @@
         GridLayout:
             canvas:
                 Color:
-                    rgba: 0.4, 0.4, 0.4, 1
+                    rgba: .95686, .95294, .93333, 1
                 Rectangle:
                     size: self.size
                     pos: self.pos

@@ -3,6 +3,26 @@
 # Communications.kv
 #   Definition of the GUI for simulation of a communications
 
+<CommunicationChannel@Popup>:
+
+    auto_dismiss: False
+    size_hint: None, None
+    size: 300, 200
+    pos: root.center_x - 150, root.center_y - 100
+
+    title: "Warning"
+
+    BoxLayout:
+
+        orientation: "vertical"
+        Label:
+            text: "Notifying pilot to respond"
+            color: 1, 0, 0, 1
+        Label:
+        Button:
+            text: "Ok"
+            on_release: root.dismiss()
+
 <ChannelLabel@Label>:
     text: ""
     size: self.texture_size
@@ -11,7 +31,7 @@
 <ChannelRow>
     canvas.before:
         Color:
-            rgba: 0.5, 0.5, 0.5, 1
+            rgba: 0.3922, 0.4314, 0.4078, 1
         Rectangle:
             size: self.size
             pos: self.pos
@@ -21,7 +41,7 @@
     size_hint_y: None
     height: 100
     rows: 1
-    cols: 2
+    cols: 3
 
 
     # Channel name
@@ -37,10 +57,24 @@
                 size: self.height/1.5, self.height/1.5
                 pos: self.center_x-self.height/3, self.center_y-self.height/3
                 radius: [400,]
-
+     
+    #Contact Pilot
+    Button:
+        canvas:
+            Color: 
+        text: "Contact Pilot"
+        on_release: 
+            root.contactPilot()
+            Factory.CommunicationChannel().open()
 
 <CommunicationsWindow>:
     name: "Communications"
+    canvas.before:
+        Color:
+            rgba: 0.3922, 0.4314, 0.4078, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
     GridLayout:
         rows: 3
 

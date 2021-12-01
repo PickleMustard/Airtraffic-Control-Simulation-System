@@ -24,6 +24,7 @@ from kivy.uix.widget import Widget
 from kivy.config import Config
 from kivy.uix.floatlayout import FloatLayout
 from kivy.core.window import Window
+from kivy.graphics.context_instructions import Color
 import time
 import threading
 from kivy.uix import *
@@ -297,6 +298,16 @@ class LoginWindow(Screen):
     # Dillon have the list of valid user here
     account = [("Admin1", "Test1234"),
                ("Admin2", "Password")]
+               
+    def __init__(self, **kwargs):
+        super(LoginWindow, self).__init__(**kwargs)
+        global master_log_access
+        global incident_log_access
+        global data
+        master_log_access = MasterLogAccess.MasterLogAccess()
+        incident_log_access = IncidentLogAccess.IncidentLogAccess()
+        with self.canvas:
+            Color(0.3922, 0.4314, 0.4078, 1)
 
     #This function is called when the submit button is hit
     def onSubmit(self):
@@ -393,11 +404,6 @@ class PlaneInfoRow(RecycleDataViewBehavior,BoxLayout):
 class PlaneInfoList(BoxLayout):
     currentPlaneInfoID = -1
     def __init__(self, **kwargs):
-        global master_log_access
-        global incident_log_access
-        global data
-        master_log_access = MasterLogAccess.MasterLogAccess()
-        incident_log_access = IncidentLogAccess.IncidentLogAccess()
         super(PlaneInfoList, self).__init__(**kwargs)
         #Clock.schedule_once(self.finish_init,0) # do not populate at start
 
@@ -745,11 +751,15 @@ class GroundCrewSimulationWindow (Screen):
 
 class CommunicationsWindow (Screen):
     pass
+    
 
 class ChannelRow(GridLayout):
     channel_text = StringProperty()
     def __init__(self, **kwargs):
         super(ChannelRow, self).__init__(**kwargs)
+        
+    def contactPilot(self):
+        incident_log_access.add_Row(1, "Required immediate communication with flight")
 
 
 

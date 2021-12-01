@@ -6,6 +6,12 @@
 
 <IncidentLogWindow>:
     name: "IncidentLog"
+    canvas.before:
+        Color:
+            rgba: .64706, .84706, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
 
     GridLayout: 
         rows: 3
@@ -60,7 +66,7 @@
 <IncidentLogRow>:
     canvas.before:
         Color:
-            rgba: 0.5, 0.5, 0.5, 1
+            rgba: 0.0901960784314, 0.0941176470588, 0.23137254902, 1
         Rectangle:
             size: self.size
             pos: self.pos
@@ -78,7 +84,7 @@
 <IncidentLogList>:
     canvas:
         Color:
-            rgba: 0.3, 0.3, 0.3, 1
+            rgba: 0.392156862745, 0.43137254902, 0.407843137255, 1
         Rectangle:
             size: self.size
             pos: self.pos

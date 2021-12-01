@@ -16,6 +16,7 @@ class LoginWidget(Widget):
     # Dillon have the list of valid user here
     account = [("Admin1", "Test1234"),
                ("Admin2", "Password")]
+              
 
     #This function is called when the submit button is hit
     def onSubmit(self):
