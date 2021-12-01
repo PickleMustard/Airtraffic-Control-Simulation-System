@@ -32,8 +32,10 @@ class MasterLogAccess():
 			print(x)
 
 	#Adds a row with the given variables
-	def add_Row(self, action_performed, additional_details, had_incident, aircraft_number):
+	def add_Row(self, aircraft_number, action_performed):
 		sql = "INSERT INTO logs (date, action_performed, additional_details, had_incident, aircraft_number) VALUES ( NOW(), %s, %s, %s, %s )"
+        additional_details = "Nothing to report"
+        had_incident = False
 		val = (action_performed, additional_details, had_incident, aircraft_number)
 		MasterLogCursor.execute(sql, val)
 		#sql = "INSERT INTO logs (date, action_performed, additional_details, had_incident, aircraft_number) VALUES (NOW(), 'Testing', 'Testing addition', 0, 1234)"
