@@ -282,9 +282,108 @@ class ArrivalList(BoxLayout):
 
 
 class DepartureList(BoxLayout):
-    # Dillon I need a query here for a plane's info!!!!---------------------------------------
     def populate(self):
-        self.rv.data = [
-            {'name.text': ''.join(sample(ascii_lowercase, 6)),
-             'value': str(randint(0, 2000))}
-            for x in range(50)]
+            {'datetime': datetimes[x],
+             'code': codes[x],
+             'note': notes[x]}
+            for x in range(3)]
+
+#  dP""b8 88""Yb  dP"Yb  88   88 88b 88 8888b.       dP""b8 88""Yb 888888 Yb        dP     .dP"Y8 88 8b    d8 
+# dP   `" 88__dP dP   Yb 88   88 88Yb88  8I  Yb     dP   `" 88__dP 88__    Yb  db  dP      `Ybo." 88 88b  d88 
+# Yb  "88 88"Yb  Yb   dP Y8   8P 88 Y88  8I  dY     Yb      88"Yb  88""     YbdPYbdP       o.`Y8b 88 88YbdP88 
+#  YboodP 88  Yb  YbodP  `YbodP' 88  Y8 8888Y"       YboodP 88  Yb 888888    YP  YP        8bodP' 88 88 YY 88 
+
+class EngineeringCheckPopup(Popup):
+    pass
+
+class ExtendGatePopup(Popup):
+    pass
+
+
+class GroundCrewSimulationWindow (Screen):
+    def engineeringCheck(self):
+        h = self.ids.GroundCrewSimFloatLayout.height
+        w = self.ids.GroundCrewSimFloatLayout.width
+
+        anim1 = Animation(x=w*.68, y=h*.68, duration=1)
+        anim1.start(self.ids.worker1)
+
+        anim2 = Animation(x=w*.54, y=h*.33, duration=1)
+        anim2.start(self.ids.worker2)
+
+        anim3 = Animation(x=w*.65, y=h*.9, duration=1)
+        anim3.start(self.ids.worker3)
+
+        anim4 = Animation(x=w*.56, y=h*.54, duration=1)
+        anim4.start(self.ids.worker4)
+
+        anim5 = Animation(x=w*.73, y=h*.29, duration=1)
+        anim5.start(self.ids.worker5)
+
+        threading.Timer(3, self.createEngineeringCheckPopup).start()
+
+    def createEngineeringCheckPopup(self):
+        eCheckPopup = EngineeringCheckPopup(pos= (self.center_x - 150, self.center_y-100))
+        eCheckPopup.open()
+
+    def extendGate(self):
+        h = self.ids.GroundCrewSimFloatLayout.height
+        w = self.ids.GroundCrewSimFloatLayout.width
+
+        # Move Workers
+        anim1 = Animation(x=w*.02, y=h*.1, duration=1)
+        anim1.start(self.ids.worker1)
+
+        anim2 = Animation(x=w*.02, y=h*.15, duration=1)
+        anim2.start(self.ids.worker2)
+
+        anim3 = Animation(x=w*.02, y=h*.2, duration=1)
+        anim3.start(self.ids.worker3)
+
+        anim4 = Animation(x=w*.02, y=h*.25, duration=1)
+        anim4.start(self.ids.worker4)
+
+        anim5 = Animation(x=w*.02, y=h*.30, duration=1)
+        anim5.start(self.ids.worker5)
+
+
+        # Extend gate
+        gateAnim = Animation(size_hint=(.03, .27), duration=3)
+        gateAnim.start(self.ids.gate)
+
+        threading.Timer(3, self.createExtendGatePopup).start()
+
+    def createExtendGatePopup(self):
+        gPopup = ExtendGatePopup(pos= (self.center_x - 150, self.center_y-100))
+        gPopup.open()
+        
+    
+
+
+
+
+#  dP""b8  dP"Yb  8b    d8 8b    d8 88   88 88b 88 88  dP""b8    db    888888 88  dP"Yb  88b 88 .dP"Y8 
+# dP   `" dP   Yb 88b  d88 88b  d88 88   88 88Yb88 88 dP   `"   dPYb     88   88 dP   Yb 88Yb88 `Ybo." 
+# Yb      Yb   dP 88YbdP88 88YbdP88 Y8   8P 88 Y88 88 Yb       dP__Yb    88   88 Yb   dP 88 Y88 o.`Y8b 
+#  YboodP  YbodP  88 YY 88 88 YY 88 `YbodP' 88  Y8 88  YboodP dP""""Yb   88   88  YbodP  88  Y8 8bodP' 
+
+
+class CommunicationsWindow (Screen):
+    pass
+
+class ChannelRow(GridLayout):
+    channel_text = StringProperty()
+    def __init__(self, **kwargs):
+        super(ChannelRow, self).__init__(**kwargs)
+
+
+
+# Class for controller for simulated workers
+class SimulatedWorkerAnimationController():
+    pass
+
+# Class for alert creator
+class AlertCreator():
+    pass
+
+    # Create alert
