@@ -14,11 +14,17 @@
             size: self.size
 
     GridLayout: 
-        rows: 3
+        rows: 4
 
         # Title
         TopBarLayout:
             title_text: "Incident Log"
+            
+        # Refresh Button
+        Button:
+            text: "Refresh"
+            on_release: IncidentLogList.refresh()
+            size_hint: 1, .07
 
         # Fields
         BoxLayout:
