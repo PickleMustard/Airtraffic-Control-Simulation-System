@@ -5,8 +5,6 @@ name = "pypi"
 
 [packages]
 kivy = "*"
-mysql = "*"
-mysql-connector-python = "*"
 
 [dev-packages]
 
