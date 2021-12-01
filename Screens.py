@@ -30,6 +30,7 @@ from kivy.uix import *
 from datetime import datetime, timedelta
 import math
 import MasterLogAccess
+import IncidentLogAccess
 from random import randint
 
 # Set window size
@@ -392,9 +393,11 @@ class PlaneInfoRow(RecycleDataViewBehavior,BoxLayout):
 class PlaneInfoList(BoxLayout):
     currentPlaneInfoID = -1
     def __init__(self, **kwargs):
-        global Log_access
+        global master_log_access
+        global incident_log_access
         global data
-        Log_access = MasterLogAccess.MasterLogAccess()
+        master_log_access = MasterLogAccess.MasterLogAccess()
+        incident_log_access = IncidentLogAccess.IncidentLogAccess()
         super(PlaneInfoList, self).__init__(**kwargs)
         #Clock.schedule_once(self.finish_init,0) # do not populate at start
 
@@ -404,7 +407,7 @@ class PlaneInfoList(BoxLayout):
 
     # Populate list of plane info from database
     def populate(self, plane):
-        # query_result = Log_access.temporary_Info_List_Search()
+        # query_result = master_log_access.temporary_Info_List_Search()
         
         self.currentPlaneInfoID = int(plane['id'])
 
@@ -615,18 +618,21 @@ class MasterLogList(BoxLayout):
 
     # Populate list of departures
     def populate(self):
-        dateTimeNow = datetime.now() - timedelta(hours=3, minutes = 27)
-        dateTimeA = dateTimeNow.strftime('%a, %b %d, %y  -  %m-%d-%y  -  %H:%M')
-        dateTimeNow = datetime.now() - timedelta(hours=5, minutes = 27)
-        dateTimeB = dateTimeNow.strftime('%a, %b %d, %y  -  %m-%d-%y  -  %H:%M')
-        dateTimeNow = datetime.now() - timedelta(hours=7, minutes = 12)
-        dateTimeC = dateTimeNow.strftime('%a, %b %d, %y  -  %m-%d-%y  -  %H:%M')
-        datetimes = [dateTimeA, dateTimeB, dateTimeC]
-        notes = ["Plane 1 landed sucessfully", "Ground crew went on lunch", "Weather check successful"]
+        #Query will give results of table as rows of rows and tuples of contained objects
+        query_result = master_log_access.get_Master_Log()
+        
+        datetimes = []
+        aircraftNumber = []
+        notes = []
+        for x in query_result:
+            datetimes.append(x[0])
+            aircraftNumber.append(x[1])
+            notes.append(x[2])
+        
 
         self.rv.data = [
             {'datetime': datetimes[x],
-                'planeID': '1',
+                'planeID': aircraftNumber[x],
                 'note': notes[x]}
             for x in range(3)]
 
@@ -657,16 +663,17 @@ class IncidentLogList(BoxLayout):
 
     # Populate list of departures
     def populate(self):
-        dateTimeNow = datetime.now() - timedelta(hours=100, minutes = 27)
-        dateTimeA = dateTimeNow.strftime('%a, %b %d, %y  -  %m-%d-%y  -  %H:%M')
-        dateTimeNow = datetime.now() - timedelta(hours=250, minutes = 27)
-        dateTimeB = dateTimeNow.strftime('%a, %b %d, %y  -  %m-%d-%y  -  %H:%M')
-        dateTimeNow = datetime.now() - timedelta(hours=300, minutes = 12)
-        dateTimeC = dateTimeNow.strftime('%a, %b %d, %y  -  %m-%d-%y  -  %H:%M')
-        datetimes = [dateTimeA, dateTimeB, dateTimeC]
-        codes = ['C', 'U', 'E']
-        notes = ['Collision between planes 1 and 2 on the runway', 'Unidentified plane found', 'Plane 1 emergency landing on runway 1']
-
+        #Query will give results of table as rows of rows and tuples of contained objects
+        query_result = incident_log_access.get_Incident_Logs()
+        
+        datetimes = []
+        aircraftNumber = []
+        notes = []
+        for x in query_result:
+            datetimes.append(x[0])
+            codes.append(x[1])
+            notes.append(x[2])
+            
         self.rv.data = [
             {'datetime': datetimes[x],
              'code': codes[x],
