@@ -26,7 +26,7 @@ class MasterLogAccess():
 
 		#*Created Table*
 		#MasterLogCursor.execute("CREATE TABLE logs (date DATETIME PRIMARY KEY, action_performed VARCHAR(3000), additional_details VARCHAR(3000), had_incident BOOLEAN, aircraft_number INT)")	
-		print("Showing Tables:")
+		print("Showing Tables for master log:")
 		MasterLogCursor.execute("SHOW TABLES")
 		for x in MasterLogCursor:
 			print(x)

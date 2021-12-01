@@ -16,7 +16,7 @@ from kivy.uix.image import Image
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
-from kivy.properties import NumericProperty, ObjectProperty
+from kivy.properties import NumericProperty, ObjectProperty, ListProperty
 from kivy.properties import StringProperty
 from kivy.animation import Animation
 from kivy.uix.button import Button
@@ -26,6 +26,8 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.core.window import Window
 from kivy.graphics.context_instructions import Color
 import time
+from kivy.graphics import *
+from kivy.graphics import Color
 import threading
 from kivy.uix import *
 from datetime import datetime, timedelta
@@ -603,7 +605,26 @@ class TerminalSimulationWindow(Screen):
 # 88 YY 88 dP""""Yb 8bodP'   88   888888 88  Yb     88ood8  YbodP   YboodP 
 
 class MasterLogWindow(Screen):
-    pass
+    def search(self):
+        # Getting the text values from text inputs
+        MasterLogDateTimeTextInputText = self.ids.MasterLogDatetimeTextInput.text
+        MasterLogPlaneIDTextInputText = self.ids.MasterLogPlaneIDTextInput.text
+        MasterLogNoteTextInputText = self.ids.MasterLogNoteTextInput.text
+
+        # make a new dataset based on search terms
+        newData = []
+        for x in getattr(self.ids.MasterLogList, 'masterLogData'):
+            # Ensure that row matches search criteria
+            condition = True
+            condition = condition and MasterLogDateTimeTextInputText.lower() in str(x[0]).lower()
+            condition = condition and MasterLogPlaneIDTextInputText.lower() in str(x[1]).lower()
+            condition = condition and MasterLogNoteTextInputText.lower() in str(x[2]).lower()
+
+            if condition:
+                newData.append({'datetime': str(x[0]),
+                                'planeID': str(x[1]),
+                                'note': str(x[2])})
+        self.ids.MasterLogList.rv.data = newData
 
 # Class for a row of DepartureList, the list of departing planes
 class MasterLogRow(RecycleDataViewBehavior,BoxLayout):
@@ -615,6 +636,7 @@ class MasterLogRow(RecycleDataViewBehavior,BoxLayout):
 
 class MasterLogList(BoxLayout):
     def __init__(self, **kwargs):
+        global masterLogData
         super(MasterLogList, self).__init__(**kwargs)
         Clock.schedule_once(self.finish_init,0)
 
@@ -626,7 +648,7 @@ class MasterLogList(BoxLayout):
     def populate(self):
         #Query will give results of table as rows of rows and tuples of contained objects
         query_result = master_log_access.get_Master_Log()
-
+        self.masterLogData = query_result
         self.rv.data = [
             {'datetime': str(x[0]),
                 'planeID': str(x[1]),
@@ -648,7 +670,26 @@ class MasterLogList(BoxLayout):
 # 88 88  Y8  YboodP 88 8888Y"  888888 88  Y8   88       88ood8  YbodP   YboodP 
 
 class IncidentLogWindow(Screen):
-    pass
+    def search(self):
+        # Getting the text values from text inputs
+        IncidentLogDatetimeTextInputText = self.ids.IncidentLogDatetimeTextInput.text
+        IncidentLogCodeTextInputText = self.ids.IncidentLogCodeTextInput.text
+        IncidentLogNoteTextInputText = self.ids.IncidentLogNoteTextInput.text
+
+        # make a new dataset based on search terms
+        newData = []
+        for x in getattr(self.ids.IncidentLogList, 'incidentLogData'):
+            # Ensure that row matches search criteria
+            condition = True
+            condition = condition and IncidentLogDatetimeTextInputText.lower() in str(x[0]).lower()
+            condition = condition and IncidentLogCodeTextInputText.lower() in str(x[1]).lower()
+            condition = condition and IncidentLogNoteTextInputText.lower() in str(x[2]).lower()
+
+            if condition:
+                newData.append({'datetime': str(x[0]),
+                                'code': str(x[1]),
+                                'note': str(x[2])})
+        self.ids.IncidentLogList.rv.data = newData
 
 # Class for a row of DepartureList, the list of departing planes
 class IncidentLogRow(RecycleDataViewBehavior,BoxLayout):
@@ -660,6 +701,7 @@ class IncidentLogRow(RecycleDataViewBehavior,BoxLayout):
 
 class IncidentLogList(BoxLayout):
     def __init__(self, **kwargs):
+        global incidentLogData
         super(IncidentLogList, self).__init__(**kwargs)
         Clock.schedule_once(self.finish_init,0)
 
@@ -671,7 +713,9 @@ class IncidentLogList(BoxLayout):
     def populate(self):
         #Query will give results of table as rows of rows and tuples of contained objects
         query_result = incident_log_access.get_Incident_Logs()
-            
+        
+        self.incidentLogData = query_result
+
         self.rv.data = [
             {'datetime': str(x[0]),
              'code': str(x[1]),
@@ -768,18 +812,19 @@ class GroundCrewSimulationWindow (Screen):
 
 
 class CommunicationsWindow (Screen):
-    pass
-    
+    red = ListProperty([1, 0, 0, 1])
+    green = ListProperty([0, 1, 0, 1])
 
-class ChannelRow(GridLayout):
-    channel_text = StringProperty()
-    def __init__(self, **kwargs):
-        super(ChannelRow, self).__init__(**kwargs)
-        
-    def contactPilot(self):
-        incident_log_access.add_Row(1, "Required immediate communication with flight")
+    def bringDown(self):
+        # You have to configure this as new channels are added
+        numChannels = 1
+        channelToBringDown = randint(1, numChannels)
 
+        print("BRINGING DOWN CHANNEL " + str(channelToBringDown))
 
+        if channelToBringDown == 1:
+            self.ids.ChannelOneCircle.source = "./resources/images/red.png"
+            incident_log_access.add_Row('3', "Communication channel 1 down")
 
 # Class for controller for simulated workers
 class SimulatedWorkerAnimationController():

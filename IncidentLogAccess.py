@@ -14,7 +14,7 @@ class IncidentLogAccess():
         global IncidentLogCursor
         IncidentLogCursor = IncidentLog.cursor()
     
-        print("Showing Tables:")
+        print("Showing Tables for incident log:")
         IncidentLogCursor.execute("SHOW TABLES")
 
         for x in IncidentLogCursor:
