@@ -279,6 +279,9 @@ class RadarWindow(Screen):
                 self.planeInfo.remove_widget(self.label4)
                 self.remove_widget(self.plane4)
 
+    def createWeatherIncident(self):
+        incident_log_access.add_Row(23, "Bad weather detected")
+
 #class for plane
 class Plane(Widget):
     pass
@@ -501,19 +504,19 @@ class ArrivalList(BoxLayout):
     # TODO:  Write query for populating list of arrivals
     # Populate list of arrivals
     def populate(self):
-        arrivalPlaneNames = ['Plane A', 'Plane B', 'Plane C']
+        arrivalPlaneNames = ['4']
         dateTimeNow = datetime.now()
         dateTimeA = dateTimeNow.strftime('%a, %b %d, %y  -  %m-%d-%y  -  %H:%M')
-        dateTimeNow = datetime.now() + timedelta(hours=3, minutes = 27)
-        dateTimeB = dateTimeNow.strftime('%a, %b %d, %y  -  %m-%d-%y  -  %H:%M')
-        dateTimeNow = datetime.now() + timedelta(hours=2, minutes = 12)
-        dateTimeC = dateTimeNow.strftime('%a, %b %d, %y  -  %m-%d-%y  -  %H:%M')
-        arrivalPlaneDatetimes = [dateTimeA, dateTimeB, dateTimeC]
+        dateTimeNow = datetime.now() + timedelta(hours=6, minutes = 1)
+        #dateTimeB = dateTimeNow.strftime('%a, %b %d, %y  -  %m-%d-%y  -  %H:%M')
+        #dateTimeNow = datetime.now() + timedelta(hours=2, minutes = 12)
+        #dateTimeC = dateTimeNow.strftime('%a, %b %d, %y  -  %m-%d-%y  -  %H:%M')
+        arrivalPlaneDatetimes = [dateTimeA]
 
         self.rv.data = [
             {'planeName': arrivalPlaneNames[x],
              'planeArrivalTime': arrivalPlaneDatetimes[x]}
-            for x in range(3)]
+            for x in range(1)]
 
 # Class for the list of departing planes
 class DepartureList(BoxLayout):
@@ -528,12 +531,12 @@ class DepartureList(BoxLayout):
     # TODO: Write query for populating list of departures
     # Populate list of departures
     def populate(self):
-        departurePlaneNames = ['Plane A', 'Plane B', 'Plane C']
+        departurePlaneNames = ['1', '2', '3']
         dateTimeNow = datetime.now() + timedelta(hours=3, minutes = 27)
         dateTimeA = dateTimeNow.strftime('%a, %b %d, %y  -  %m-%d-%y  -  %H:%M')
-        dateTimeNow = datetime.now() + timedelta(hours=5, minutes = 27)
+        dateTimeNow = datetime.now() + timedelta(hours=4, minutes = 27)
         dateTimeB = dateTimeNow.strftime('%a, %b %d, %y  -  %m-%d-%y  -  %H:%M')
-        dateTimeNow = datetime.now() + timedelta(hours=7, minutes = 12)
+        dateTimeNow = datetime.now() + timedelta(hours=5, minutes = 12)
         dateTimeC = dateTimeNow.strftime('%a, %b %d, %y  -  %m-%d-%y  -  %H:%M')
         departurePlaneDateteimes = [dateTimeA, dateTimeB, dateTimeC]
 
