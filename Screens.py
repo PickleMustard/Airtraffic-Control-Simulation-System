@@ -20,6 +20,46 @@ from kivy.animation import Animation
 from kivy.uix.button import Button
 from kivy.uix.widget import Widget
 from kivy.config import Config
+from kivy.uix.floatlayout import FloatLayout
+from kivy.core.window import Window
+import time
+import threading
+from kivy.uix import *
+from datetime import datetime, timedelta
+import math
+import MasterLogAccess
+from random import randint
+
+# Set window size
+Window.size = (1280, 720)
+Window.minimum_width, Window.minimum_height = Window.size
+
+# Planes to use in th
+examplePlanes = [{
+    "id": "000001",
+    "airline": "American Airlines",
+    "gasUsage": (str(randint(90, 110)/100)), # in gal/s
+    "altitude": str(randint(39950, 40050)), # in mi
+    "expectedAltitude": 40000, # in mi
+    "weight": 91678, # in lbs
+    "weightCapacity": 100000, # in lbs
+    "runway": "Runway 1",
+    "dockingGate": "Gate 1",
+    "expectedRateOfDescent": 2000 # in ft/min
+}]
+
+# 888888 888888 8b    d8 88""Yb 88        db    888888 888888 .dP"Y8 
+#   88   88__   88b  d88 88__dP 88       dPYb     88   88__   `Ybo." 
+#   88   88""   88YbdP88 88"""  88  .o  dP__Yb    88   88""   o.`Y8b 
+#   88   888888 88 YY 88 88     88ood8 dP""""Yb   88   888888 8bodP' 
+
+class TitleLabel(Label):
+    pass
+
+class TopBarLayout(GridLayout):
+    title_text = StringProperty()
+    def __init__(self, **kwargs):
+        super(TopBarLayout, self).__init__(**kwargs)
 
 #this variable is so that animation does not start until a certain sceen in on
 startMoving = False
@@ -31,7 +71,14 @@ class WindowManager(ScreenManager):
     mainMenu = ObjectProperty(None)
     radar = ObjectProperty(None)
 
-#this hos the code for the radar page
+
+# 88""Yb    db    8888b.     db    88""Yb 
+# 88__dP   dPYb    8I  Yb   dPYb   88__dP 
+# 88"Yb   dP__Yb   8I  dY  dP__Yb  88"Yb  
+# 88  Yb dP""""Yb 8888Y"  dP""""Yb 88  Yb 
+
+#this is the code for the radar page
+
 class RadarWindow(Screen):
 
     #these are the variable that corresponds with planes
@@ -195,6 +242,8 @@ class LoginWindow(Screen):
         if valid:
             self.manager.current = "menuScreen"
             self.textSubmit = ""
+            self.ids.User.text = ""
+            self.ids.Password.text = ""
         #else display incorrect username or password message
         else:
             self.textSubmit = "Incorrect username or password."
@@ -208,12 +257,132 @@ class MainMenuWindow(Screen):
         self.manager.transition = SlideTransition(direction='right', duration=.25)
 
 
-# Remove these two imports once PlaneInfoList.populate is implemented
-from random import sample, randint
-from string import ascii_lowercase
+# 88""Yb 88        db    88b 88 888888     88 88b 88 888888  dP"Yb      Yb        dP 88 88b 88 8888b.   dP"Yb  Yb        dP 
+# 88__dP 88       dPYb   88Yb88 88__       88 88Yb88 88__   dP   Yb      Yb  db  dP  88 88Yb88  8I  Yb dP   Yb  Yb  db  dP  
+# 88"""  88  .o  dP__Yb  88 Y88 88""       88 88 Y88 88""   Yb   dP       YbdPYbdP   88 88 Y88  8I  dY Yb   dP   YbdPYbdP   
+# 88     88ood8 dP""""Yb 88  Y8 888888     88 88  Y8 88      YbodP         YP  YP    88 88  Y8 8888Y"   YbodP     YP  YP    
 
-
+# Class for PlaneInfoWindow root widget
 class PlaneInfoWindow(Screen):
+
+    def search(self):
+        # Getting the text values from text inputs
+        searchKey = self.ids.PlaneInfoTextInput.text
+
+        # make a new dataset based on search terms
+        newData = []
+        for x in getattr(self.ids.PlaneInfoList, 'data'):
+            # Ensure that row matches search criteria
+            if searchKey == "" or (searchKey.lower() in str(x[0]).lower()):
+                newData.append({'dataName': str(x[0]),
+                                'dataValue': str(x[1])})
+        self.ids.PlaneInfoList.rv.data = newData
+
+    def getInfo(self):
+        planeInfoIDText = self.ids.PlaneInfoPlaneID.text
+
+        # Check for an invalid id
+        try: 
+            planeInfoID = int(planeInfoIDText)
+        except: 
+            self.ids.PlaneInfoPlaneIDGetInfoResult.text = "Invalid plane ID"
+            return
+
+        # Check for an invalid id
+        if planeInfoID < 0:
+            self.ids.PlaneInfoPlaneIDGetInfoResult.text = "Invalid plane ID"
+            return
+
+        # Reset result text if plane id is valid
+        self.ids.PlaneInfoPlaneIDGetInfoResult.text = ''
+        
+        # Search for a plane of the given id, populate list if found
+        for p in examplePlanes:
+            if int(p["id"]) == planeInfoID:
+                self.ids.PlaneInfoList.populate(p)
+                return
+        
+        # No plane found with the given id
+        self.ids.PlaneInfoPlaneIDGetInfoResult.text = "No plane foudn with ID: " + planeInfoIDText
+
+
+
+# Class for a row in the table of plane information in PlaneInfo Screen
+class PlaneInfoRow(RecycleDataViewBehavior,BoxLayout):
+    dataName = StringProperty()
+    dataValue = StringProperty()
+    def __init__(self, **kwargs):
+        super(PlaneInfoRow, self).__init__(**kwargs)
+
+# Class for the list of plane information in PlaneInfo Screen
+#   Autopopulates on the first clock
+class PlaneInfoList(BoxLayout):
+    currentPlaneInfoID = -1
+    def __init__(self, **kwargs):
+        global Log_access
+        global data
+        Log_access = MasterLogAccess.MasterLogAccess()
+        super(PlaneInfoList, self).__init__(**kwargs)
+        #Clock.schedule_once(self.finish_init,0) # do not populate at start
+
+
+    # Populate list of plane info from database
+    def populate(self, plane):
+        # query_result = Log_access.temporary_Info_List_Search()
+        
+        self.currentPlaneInfoID = int(plane['id'])
+
+        # Given data
+        query_result = [
+            ['Plane ID', str(plane['id'])],
+            ['Airline', str(plane['airline'])],
+            # TODO: Update the object instead of this value
+            ['Gas Usage', str(randint(90, 110)/100) + " gal/s"],
+            ['Altitude', str(randint(39950, 40050)) + " mi"],
+            ['Expected Altitude', str(plane['expectedAltitude']) + " mi"],
+            ['Weight', str(plane['weight']) + " lbs"],
+            ['Weight Capacity', str(plane['weightCapacity']) + " lbs"],
+            ['Runway', str(plane['runway'])],
+            ['Docking Gate', str(plane['dockingGate'])],
+            ['Expected rate of descent', str(plane['expectedRateOfDescent']) + " ft/min"]
+        ]
+
+        # Populate list with data values
+        self.data = query_result
+        self.rv.data = [{'dataName': str(x[0]),
+        'dataValue': str(x[1])} for x in query_result]
+
+    def refresh(self):
+        # Check if id is not currently set
+        if self.currentPlaneInfoID < 0:
+            return
+
+        # Find plane with current id
+        for p in examplePlanes:
+            if int(p["id"]) == self.currentPlaneInfoID:
+                self.populate(p)
+                return
+
+    def makeOverweight(self):
+        # Check if id is not currently set
+        if self.currentPlaneInfoID < 0:
+            return
+
+        # Find plane with current id
+        for p in examplePlanes:
+            if int(p["id"]) == self.currentPlaneInfoID:
+                p["weight"] = p["weightCapacity"] + randint(100, 500)
+        
+        self.refresh()
+
+# .dP"Y8  dP""b8 88  88 888888 8888b.  88   88 88     888888 
+# `Ybo." dP   `" 88  88 88__    8I  Yb 88   88 88     88__   
+# o.`Y8b Yb      888888 88""    8I  dY Y8   8P 88  .o 88""   
+# 8bodP'  YboodP 88  88 888888 8888Y"  `YbodP' 88ood8 888888 
+
+
+# Class for ScheduleWindow root widget
+class ScheduleWindow(Screen):
     pass
 
 
