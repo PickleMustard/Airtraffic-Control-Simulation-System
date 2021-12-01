@@ -188,7 +188,9 @@
                 padding: 20, 20, 20, 20
                 Button:
                     text: "Bad Weather"
-                    on_release: Factory.MyPopup().open()
+                    on_release: 
+                        root.createWeatherIncident()
+                        Factory.MyPopup().open()
                 Button:
                     text: "Main Menu"
                     on_release:

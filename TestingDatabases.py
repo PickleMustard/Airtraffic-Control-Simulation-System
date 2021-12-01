@@ -9,19 +9,13 @@ class TestingDatabases():
 	def __init__(self):
 		global Log_access
 		Log_access = MasterLogAccess.MasterLogAccess()
-		Log_access.add_Row("Test Entry", "This is an entry to test the table insertion method", 0, 1234)
+		Log_access.add_Row("Test Entry", "This is an entry to test the table insertion method", 0, 1)
 		time.sleep(1)
-		Log_access.add_Row("Test Entry", "This is an entry to test the table insertion method", 0, 1235)
+		Log_access.add_Row("Test Entry", "This is an entry to test the table insertion method", 0, 2)
 		time.sleep(1)
-		Log_access.add_Row("Test Entry", "This is an entry to test the table insertion method", 0, 1236)
+		Log_access.add_Row("Test Entry", "This is an entry to test the table insertion method", 0, 3)
 		time.sleep(1)
-		Log_access.add_Row("Test Entry", "This is an entry to test the table insertion method", 1, 1237)
-		time.sleep(1)
-		Log_access.add_Row("Test Entry", "This is an entry to test the table insertion method", 1, 1238)
-		time.sleep(1)
-		Log_access.add_Row("Test Entry", "This is an entry to test the table insertion method", 1, 1239)
-		time.sleep(1)
-		Log_access.add_Row("Test Entry", "This is an entry to test the table insertion method", 0, 1230)
+		Log_access.add_Row("Test Entry", "This is an entry to test the table insertion method", 1, 4)
 		
 		Log_access = IncidentLogAccess.IncidentLogAccess()
 		Log_access.add_Row(1, "Test Entry")
