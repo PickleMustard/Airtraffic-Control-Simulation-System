@@ -24,6 +24,7 @@ from kivy.uix.widget import Widget
 from kivy.config import Config
 from kivy.uix.floatlayout import FloatLayout
 from kivy.core.window import Window
+from kivy.graphics.context_instructions import Color
 import time
 from kivy.graphics import *
 from kivy.graphics import Color
@@ -299,6 +300,16 @@ class LoginWindow(Screen):
     # Dillon have the list of valid user here
     account = [("Admin1", "Test1234"),
                ("Admin2", "Password")]
+               
+    def __init__(self, **kwargs):
+        super(LoginWindow, self).__init__(**kwargs)
+        global master_log_access
+        global incident_log_access
+        global data
+        master_log_access = MasterLogAccess.MasterLogAccess()
+        incident_log_access = IncidentLogAccess.IncidentLogAccess()
+        with self.canvas:
+            Color(0.3922, 0.4314, 0.4078, 1)
 
     #This function is called when the submit button is hit
     def onSubmit(self):
@@ -395,11 +406,6 @@ class PlaneInfoRow(RecycleDataViewBehavior,BoxLayout):
 class PlaneInfoList(BoxLayout):
     currentPlaneInfoID = -1
     def __init__(self, **kwargs):
-        global master_log_access
-        global incident_log_access
-        global data
-        master_log_access = MasterLogAccess.MasterLogAccess()
-        incident_log_access = IncidentLogAccess.IncidentLogAccess()
         super(PlaneInfoList, self).__init__(**kwargs)
         #Clock.schedule_once(self.finish_init,0) # do not populate at start
 
@@ -648,6 +654,15 @@ class MasterLogList(BoxLayout):
                 'planeID': str(x[1]),
                 'note': str(x[2])}
             for x in query_result]
+    
+    def refresh(self):
+        query_result = master_log_access.get_Master_Log()
+            
+        self.rv.data = [
+            {'datetime': str(x[0]),
+                'planeID': str(x[1]),
+                'note': str(x[2])}
+            for x in query_result]
 
 # 88 88b 88  dP""b8 88 8888b.  888888 88b 88 888888     88      dP"Yb   dP""b8 
 # 88 88Yb88 dP   `" 88  8I  Yb 88__   88Yb88   88       88     dP   Yb dP   `" 
@@ -701,6 +716,15 @@ class IncidentLogList(BoxLayout):
         
         self.incidentLogData = query_result
 
+        self.rv.data = [
+            {'datetime': str(x[0]),
+             'code': str(x[1]),
+             'note': str(x[2])}
+            for x in query_result]
+            
+    def refresh(self):
+        query_result = incident_log_access.get_Incident_Logs()
+            
         self.rv.data = [
             {'datetime': str(x[0]),
              'code': str(x[1]),

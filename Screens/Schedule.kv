@@ -8,7 +8,7 @@
 <ArrivalRow>:
     canvas.before:
         Color:
-            rgba: 0.5, 0.5, 0.5, 1
+            rgba: 0.0901960784314, 0.0941176470588, 0.23137254902, 1
         Rectangle:
             size: self.size
             pos: self.pos
@@ -22,7 +22,7 @@
 <DepartureRow>:
     canvas.before:
         Color:
-            rgba: 0.5, 0.5, 0.5, 1
+            rgba: 0.0901960784314, 0.0941176470588, 0.23137254902, 1
         Rectangle:
             size: self.size
             pos: self.pos
@@ -36,12 +36,29 @@
 
 <ScheduleWindow>:
     name: "Schedule"
+    canvas.before:
+        Color:
+            rgba: .95686, .95294, .93333, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
     
     GridLayout:
         rows: 2
-
-        TopBarLayout:
-            title_text: "Schedule"
+        TopBarLayout:  
+            
+            Label:
+                text: "Schedule"
+                color:0,0,0,1
+                bold: True
+                font_size: dp(20)
+                max_lines: 1
+                halign: 'left'
+                valign: 'middle'
+                text_size: self.size
+                size_hint: 1, 1
+                anchor_x: 'left'
+            
 
         GridLayout:
             cols: 2
@@ -52,7 +69,7 @@
 <ArrivalList>:
     canvas:
         Color:
-            rgba: 0.3, 0.3, 0.3, 1
+            rgba: 0.392156862745, 0.43137254902, 0.407843137255, 1
         Rectangle:
             size: self.size
             pos: self.pos
@@ -84,7 +101,7 @@
 <DepartureList>:
     canvas:
         Color:
-            rgba: 0.3, 0.3, 0.3, 1
+            rgba: 0.3922, 0.4314, 0.4078, 1
         Rectangle:
             size: self.size
             pos: self.pos

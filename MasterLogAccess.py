@@ -17,7 +17,7 @@ class MasterLogAccess():
 		global MasterLog
 		MasterLog = mysql.connector.connect(
 			host="localhost",
-			user="root",
+			user="user",
 			password="password",
 			database="Master_Log"
 		)
@@ -36,6 +36,7 @@ class MasterLogAccess():
 		sql = "INSERT INTO logs (date, action_performed, additional_details, had_incident, aircraft_number) VALUES ( NOW(), %s, %s, %s, %s )"
 		val = (action_performed, additional_details, had_incident, aircraft_number)
 		MasterLogCursor.execute(sql, val)
+		MasterLog.commit()
 		#sql = "INSERT INTO logs (date, action_performed, additional_details, had_incident, aircraft_number) VALUES (NOW(), 'Testing', 'Testing addition', 0, 1234)"
 
 	

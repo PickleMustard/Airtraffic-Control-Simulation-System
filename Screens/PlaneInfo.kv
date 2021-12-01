@@ -30,6 +30,12 @@
 
 <PlaneInfoWindow>:
     name: "PlaneInfo"
+    canvas.before:
+        Color:
+            rgba: 0.3922, 0.4314, 0.4078, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
 
     GridLayout:
         rows: 3
@@ -47,7 +53,7 @@
             GridLayout: 
                 canvas:
                     Color:
-                        rgba: 0.11372549, 0.11372549, 0.11372549, 1
+                        rgba: 0.392156862745, 0.43137254902, 0.407843137255, 1
                     Rectangle:
                         size: self.size
                         pos: self.pos
@@ -81,7 +87,7 @@
             GridLayout: 
                 canvas:
                     Color:
-                        rgba: 0.11372549, 0.11372549, 0.11372549, 1
+                        rgba: 0.392156862745, 0.43137254902, 0.407843137255, 1
                     Rectangle:
                         size: self.size
                         pos: self.pos
@@ -121,7 +127,7 @@
 <PlaneInfoRow>:
     canvas.before:
         Color:
-            rgba: 0.5, 0.5, 0.5, 1
+            rgba: 0.0901960784314, 0.0941176470588, 0.23137254902, 1
         Rectangle:
             size: self.size
             pos: self.pos
@@ -136,7 +142,7 @@
 <PlaneInfoList>:
     canvas:
         Color:
-            rgba: 0.3, 0.3, 0.3, 1
+            rgba: 0.392156862745, 0.43137254902, 0.407843137255, 1
         Rectangle:
             size: self.size
             pos: self.pos

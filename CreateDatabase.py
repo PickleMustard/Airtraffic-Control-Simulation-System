@@ -5,9 +5,8 @@ class CreateDatabase():
     def __init__(self):
         db = mysql.connector.connect(
             host="localhost",
-            user="root",
+            user="user",
             password="password"
-
         )
 
         dbcursor = db.cursor()

@@ -1,4 +1,5 @@
 import MasterLogAccess
+import IncidentLogAccess
 import time
 
 #Temporary class to test the implementation of database functionality
@@ -21,6 +22,10 @@ class TestingDatabases():
 		Log_access.add_Row("Test Entry", "This is an entry to test the table insertion method", 1, 1239)
 		time.sleep(1)
 		Log_access.add_Row("Test Entry", "This is an entry to test the table insertion method", 0, 1230)
+		
+		Log_access = IncidentLogAccess.IncidentLogAccess()
+		Log_access.add_Row(1, "Test Entry")
+		Log_access.add_Row(2, "Test Entry 2")
 
 	#Calls the general search method of the Master Log Database Access
 	#Then prints the results of the query
