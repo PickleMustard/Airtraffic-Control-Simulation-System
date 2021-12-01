@@ -8,7 +8,7 @@
     name: "MasterLog"
 
     GridLayout: 
-        rows: 3
+        rows: 4
 
         # Title
         TopBarLayout:
@@ -24,7 +24,7 @@
                     pos: self.pos
 
             orientation: 'horizontal'
-            size_hint: 1, .05
+            size_hint: 1, .1
             cols: 10
             padding: dp(10), 0, dp(10), 0
 
@@ -35,6 +35,10 @@
                     font_size: dp(20)
                     text: "Datetime"
                     size: self.texture_size
+                TextInput:
+                    id: MasterLogDatetimeTextInput
+                    multiline: False
+                    on_text_validate: root.search()
 
             # PlaneID
             BoxLayout:
@@ -42,7 +46,11 @@
                 Label:
                     font_size: dp(20)
                     text: "Plane ID"
-                    size: self.texture_size
+                    size: self.texture_size                
+                TextInput:
+                    id: MasterLogPlaneIDTextInput
+                    multiline: False
+                    on_text_validate: root.search()
 
             # note
             BoxLayout:
@@ -51,6 +59,10 @@
                     font_size: dp(20)
                     text: "Note"
                     size: self.texture_size
+                TextInput:
+                    id: MasterLogNoteTextInput
+                    multiline: False
+                    on_text_validate: root.search()
 
         # Master Log List
         MasterLogList:

@@ -24,7 +24,7 @@
                     pos: self.pos
 
             orientation: 'horizontal'
-            size_hint: 1, .05
+            size_hint: 1, .1
             cols: 10
             padding: dp(10), 0, dp(10), 0
 
@@ -35,6 +35,11 @@
                     font_size: dp(20)
                     text: "Datetime"
                     size: self.texture_size
+                TextInput:
+                    id: IncidentLogDatetimeTextInput
+                    multiline: False
+                    on_text_validate: root.search()
+                    font_size: dp(20)
 
             # Code
             BoxLayout:
@@ -43,6 +48,11 @@
                     font_size: dp(20)
                     text: "Code"
                     size: self.texture_size
+                TextInput:
+                    id: IncidentLogCodeTextInput
+                    multiline: False
+                    on_text_validate: root.search()
+                    font_size: dp(20)
 
             # note
             BoxLayout:
@@ -51,6 +61,11 @@
                     font_size: dp(20)
                     text: "Note"
                     size: self.texture_size
+                TextInput:
+                    id: IncidentLogNoteTextInput
+                    multiline: False
+                    on_text_validate: root.search()
+                    font_size: dp(20)
 
         # Master Log List
         IncidentLogList:

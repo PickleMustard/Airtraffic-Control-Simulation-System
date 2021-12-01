@@ -8,45 +8,32 @@
     size: self.texture_size
     font_size: dp(30)
 
-<ChannelRow>
-    canvas.before:
-        Color:
-            rgba: 0.5, 0.5, 0.5, 1
-        Rectangle:
-            size: self.size
-            pos: self.pos
-    channel_text: ""
-
-    size_hint_x: 1
-    size_hint_y: None
-    height: 100
-    rows: 1
-    cols: 2
-
-
-    # Channel name
-    ChannelLabel: 
-        text: root.channel_text
-
-    # Status "Light"
-    Widget:
-        canvas:
-            Color:
-                rgba: 0, .75, 0, 1
-            RoundedRectangle:
-                size: self.height/1.5, self.height/1.5
-                pos: self.center_x-self.height/3, self.center_y-self.height/3
-                radius: [400,]
-
-
 <CommunicationsWindow>:
     name: "Communications"
     GridLayout:
-        rows: 3
+        rows: 4
 
         # Title
         TopBarLayout:
             title_text: "Communications"
+
+        # Input
+        BoxLayout:
+            orientation:'horizontal'
+            canvas:
+                Color:
+                    rgba: 0.11372549, 0.11372549, 0.11372549, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            size_hint: 1, .07
+
+            Button:
+                text: "Bring down"
+                on_release: root.bringDown()
+
+
 
         # Column headers
         GridLayout: 
@@ -79,14 +66,89 @@
             rows: 3
             spacing: dp(10)
 
-            ChannelRow:
-                id: Channel1
-                channel_text: "1"
+            # 1
+            GridLayout:
+                canvas.before:
+                    Color:
+                        rgba: 0.5, 0.5, 0.5, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
 
-            ChannelRow:
-                id: Channel2
-                channel_text: "2"
+                size_hint_x: 1
+                size_hint_y: None
+                height: 100
+                rows: 1
+                cols: 2
 
-            ChannelRow:
-                id: Channel3
-                channel_text: "3"
+
+                # Channel name
+                ChannelLabel: 
+                    text: "1"
+
+                # Status "Light"
+                Image:
+                    id: ChannelOneCircle
+                    source: "./resources/images/green.png"
+                    size: root.height/1.5, root.height/1.5
+                    allow_stretch: True
+                    keep_ratio: True
+                    #pos: self.center_x-self.height/3, self.center_y-self.height/3
+
+            # 2
+            GridLayout:
+                canvas.before:
+                    Color:
+                        rgba: 0.5, 0.5, 0.5, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+
+                size_hint_x: 1
+                size_hint_y: None
+                height: 100
+                rows: 1
+                cols: 2
+
+
+                # Channel name
+                ChannelLabel: 
+                    text: "2"
+
+                # Status "Light"
+                Image:
+                    id: ChannelTwoCircle
+                    source: "./resources/images/green.png"
+                    size: root.height/1.5, root.height/1.5
+                    allow_stretch: True
+                    keep_ratio: True
+                    #pos: self.center_x-self.height/3, self.center_y-self.height/3
+
+            # 3
+            GridLayout:
+                canvas.before:
+                    Color:
+                        rgba: 0.5, 0.5, 0.5, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+
+                size_hint_x: 1
+                size_hint_y: None
+                height: 100
+                rows: 1
+                cols: 2
+
+
+                # Channel name
+                ChannelLabel: 
+                    text: "3"
+
+                # Status "Light"
+                Image:
+                    id: ChannelTwoCircle
+                    source: "./resources/images/green.png"
+                    size: root.height/1.5, root.height/1.5
+                    allow_stretch: True
+                    keep_ratio: True
+                    #pos: self.center_x-self.height/3, self.center_y-self.height/3
