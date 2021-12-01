@@ -620,21 +620,12 @@ class MasterLogList(BoxLayout):
     def populate(self):
         #Query will give results of table as rows of rows and tuples of contained objects
         query_result = master_log_access.get_Master_Log()
-        
-        datetimes = []
-        aircraftNumber = []
-        notes = []
-        for x in query_result:
-            datetimes.append(x[0])
-            aircraftNumber.append(x[1])
-            notes.append(x[2])
-        
 
         self.rv.data = [
-            {'datetime': datetimes[x],
-                'planeID': aircraftNumber[x],
-                'note': notes[x]}
-            for x in range(3)]
+            {'datetime': str(x[0]),
+                'planeID': str(x[1]),
+                'note': str(x[2])}
+            for x in query_result]
 
 # 88 88b 88  dP""b8 88 8888b.  888888 88b 88 888888     88      dP"Yb   dP""b8 
 # 88 88Yb88 dP   `" 88  8I  Yb 88__   88Yb88   88       88     dP   Yb dP   `" 
@@ -665,20 +656,12 @@ class IncidentLogList(BoxLayout):
     def populate(self):
         #Query will give results of table as rows of rows and tuples of contained objects
         query_result = incident_log_access.get_Incident_Logs()
-        
-        datetimes = []
-        aircraftNumber = []
-        notes = []
-        for x in query_result:
-            datetimes.append(x[0])
-            codes.append(x[1])
-            notes.append(x[2])
             
         self.rv.data = [
-            {'datetime': datetimes[x],
-             'code': codes[x],
-             'note': notes[x]}
-            for x in range(3)]
+            {'datetime': str(x[0]),
+             'code': str(x[1]),
+             'note': str(x[2])}
+            for x in query_result]
 
 #  dP""b8 88""Yb  dP"Yb  88   88 88b 88 8888b.       dP""b8 88""Yb 888888 Yb        dP     .dP"Y8 88 8b    d8 
 # dP   `" 88__dP dP   Yb 88   88 88Yb88  8I  Yb     dP   `" 88__dP 88__    Yb  db  dP      `Ybo." 88 88b  d88 
