@@ -29,7 +29,7 @@
     font_size: dp(30)
 
 <ChannelRow>
-    canvas.before:
+    canvas:
         Color:
             rgba: 0.3922, 0.4314, 0.4078, 1
         Rectangle:
@@ -49,22 +49,20 @@
         text: root.channel_text
 
     # Status "Light"
-    Widget:
-        canvas:
-            Color:
-                rgba: 0, .75, 0, 1
-            RoundedRectangle:
-                size: self.height/1.5, self.height/1.5
-                pos: self.center_x-self.height/3, self.center_y-self.height/3
-                radius: [400,]
+    Image:
+        id: circle
+        source: "./resources/images/green.png"
+        size: root.height/1.5, root.height/1.5
+        allow_stretch: True
+        keep_ratio: True
+        #pos: self.center_x-self.height/3, self.center_y-self.height/3
      
     #Contact Pilot
     Button:
-        canvas:
-            Color: 
+        font_size: dp(20)
         text: "Contact Pilot"
         on_release: 
-            root.contactPilot()
+            #root.contactPilot()
             Factory.CommunicationChannel().open()
 
 <CommunicationsWindow>:
@@ -125,95 +123,36 @@
                 text: "Status"
                 size: self.texture_size
 
+            Label:
+                text: "Contact"
+
         # Channels
         GridLayout:
             cols: 1
-            rows: 3
+            rows: 5
             spacing: dp(10)
 
             # 1
-            GridLayout:
-                canvas.before:
-                    Color:
-                        rgba: 0.5, 0.5, 0.5, 1
-                    Rectangle:
-                        size: self.size
-                        pos: self.pos
-
-                size_hint_x: 1
-                size_hint_y: None
-                height: 100
-                rows: 1
-                cols: 2
-
-
-                # Channel name
-                ChannelLabel: 
-                    text: "1"
-
-                # Status "Light"
-                Image:
-                    id: ChannelOneCircle
-                    source: "./resources/images/green.png"
-                    size: root.height/1.5, root.height/1.5
-                    allow_stretch: True
-                    keep_ratio: True
-                    #pos: self.center_x-self.height/3, self.center_y-self.height/3
+            ChannelRow:
+                channel_text: '1'
+                id: Channel1
 
             # 2
-            GridLayout:
-                canvas.before:
-                    Color:
-                        rgba: 0.5, 0.5, 0.5, 1
-                    Rectangle:
-                        size: self.size
-                        pos: self.pos
-
-                size_hint_x: 1
-                size_hint_y: None
-                height: 100
-                rows: 1
-                cols: 2
-
-
-                # Channel name
-                ChannelLabel: 
-                    text: "2"
-
-                # Status "Light"
-                Image:
-                    id: ChannelTwoCircle
-                    source: "./resources/images/green.png"
-                    size: root.height/1.5, root.height/1.5
-                    allow_stretch: True
-                    keep_ratio: True
-                    #pos: self.center_x-self.height/3, self.center_y-self.height/3
-
+            ChannelRow:
+                channel_text: '2'
+                id: Channel2
+                
             # 3
-            GridLayout:
-                canvas.before:
-                    Color:
-                        rgba: 0.5, 0.5, 0.5, 1
-                    Rectangle:
-                        size: self.size
-                        pos: self.pos
+            ChannelRow:
+                channel_text: '3'
+                id: Channel3
 
-                size_hint_x: 1
-                size_hint_y: None
-                height: 100
-                rows: 1
-                cols: 2
+            # 4
+            ChannelRow:
+                channel_text: '4'
+                id: Channel4
 
-
-                # Channel name
-                ChannelLabel: 
-                    text: "3"
-
-                # Status "Light"
-                Image:
-                    id: ChannelTwoCircle
-                    source: "./resources/images/green.png"
-                    size: root.height/1.5, root.height/1.5
-                    allow_stretch: True
-                    keep_ratio: True
-                    #pos: self.center_x-self.height/3, self.center_y-self.height/3
+            # 5
+            ChannelRow:
+                channel_text: '5'
+                id: Channel5

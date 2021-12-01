@@ -7,7 +7,7 @@ class IncidentLogAccess():
         global IncidentLog
         IncidentLog = mysql.connector.connect(
             host="localhost",
-            user="user",
+            user="root",
             password="password",
             database="Incident_Log"
         )

@@ -817,14 +817,53 @@ class CommunicationsWindow (Screen):
 
     def bringDown(self):
         # You have to configure this as new channels are added
-        numChannels = 1
+        numChannels = 5
+        
         channelToBringDown = randint(1, numChannels)
 
         print("BRINGING DOWN CHANNEL " + str(channelToBringDown))
 
         if channelToBringDown == 1:
-            self.ids.ChannelOneCircle.source = "./resources/images/red.png"
+            self.ids.Channel1.ids.circle.source = "./resources/images/red.png"
             incident_log_access.add_Row('3', "Communication channel 1 down")
+            Clock.schedule_once(self.make1Green, 3)
+
+        if channelToBringDown == 2:
+            self.ids.Channel2.ids.circle.source = "./resources/images/red.png"
+            incident_log_access.add_Row('3', "Communication channel 2 down")
+            Clock.schedule_once(self.make2Green, 3)
+
+        if channelToBringDown == 3:
+            self.ids.Channel3.ids.circle.source = "./resources/images/red.png"
+            incident_log_access.add_Row('3', "Communication channel 3 down")
+            Clock.schedule_once(self.make3Green, 3)
+
+        if channelToBringDown == 4:
+            self.ids.Channel4.ids.circle.source = "./resources/images/red.png"
+            incident_log_access.add_Row('3', "Communication channel 4 down")
+            Clock.schedule_once(self.make4Green, 3)
+
+        if channelToBringDown == 5:
+            self.ids.Channel5.ids.circle.source = "./resources/images/red.png"
+            incident_log_access.add_Row('3', "Communication channel 5 down")
+            Clock.schedule_once(self.make5Green, 3)
+
+
+    def make1Green(self, dt):
+        self.ids.Channel1.ids.circle.source = "./resources/images/green.png"
+    def make2Green(self, dt):
+        self.ids.Channel2.ids.circle.source = "./resources/images/green.png"
+    def make3Green(self, dt):
+        self.ids.Channel3.ids.circle.source = "./resources/images/green.png"
+    def make4Green(self, dt):
+        self.ids.Channel4.ids.circle.source = "./resources/images/green.png"
+    def make5Green(self, dt):
+        self.ids.Channel5.ids.circle.source = "./resources/images/green.png"
+
+class ChannelRow(GridLayout):
+    channel_text = StringProperty()
+    def __init__(self, **kwargs):
+        super(ChannelRow, self).__init__(**kwargs)
 
 # Class for controller for simulated workers
 class SimulatedWorkerAnimationController():

@@ -17,7 +17,7 @@ class MasterLogAccess():
 		global MasterLog
 		MasterLog = mysql.connector.connect(
 			host="localhost",
-			user="user",
+			user="root",
 			password="password",
 			database="Master_Log"
 		)
