@@ -36,6 +36,14 @@
                     text: "Datetime"
                     size: self.texture_size
 
+            # PlaneID
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    font_size: dp(20)
+                    text: "Plane ID"
+                    size: self.texture_size
+
             # note
             BoxLayout:
                 orientation: 'vertical'
@@ -57,10 +65,13 @@
             size: self.size
             pos: self.pos
     datetime: ''
+    planeID: ''
     note: ''
     
     Label:
         text: root.datetime
+    Label: 
+        text: root.planeID
     Label:
         text: root.note
 

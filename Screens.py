@@ -44,12 +44,58 @@ examplePlanes = [{
     "gasUsage": (str(randint(90, 110)/100)), # in gal/s
     "altitude": str(randint(39950, 40050)), # in mi
     "expectedAltitude": 40000, # in mi
-    "weight": 91678, # in lbs
-    "weightCapacity": 100000, # in lbs
+    "weight": 180678, # in lbs
+    "weightCapacity": 205000, # in lbs
     "runway": "Runway 1",
     "dockingGate": "Gate 1",
-    "expectedRateOfDescent": 2000 # in ft/min
-}]
+    "expectedRateOfDescent": 2000, # in ft/min
+    "airliner": "Airbus A321-200",
+    "flightStatus": "Departing"
+}, 
+{
+    "id": "000002",
+    "airline": "Delta Airlines",
+    "gasUsage": (str(randint(90, 110)/100)), # in gal/s
+    "altitude": str(randint(39950, 40050)), # in mi
+    "expectedAltitude": 40000, # in mi
+    "weight": 130105, # in lbs
+    "weightCapacity": 157300, # in lbs
+    "runway": "Runway 1",
+    "dockingGate": "Gate 1",
+    "expectedRateOfDescent": 2000, # in ft/min
+    "airliner": "Boeing 737",
+    "flightStatus": "Preparing"
+}, 
+{
+    "id": "000003",
+    "airline": "United Airlines",
+    "gasUsage": (str(randint(90, 110)/100)), # in gal/s
+    "altitude": str(randint(39950, 40050)), # in mi
+    "expectedAltitude": 40000, # in mi
+    "weight": 101582, # in lbs
+    "weightCapacity": 133004, # in lbs
+    "runway": "Runway 1",
+    "dockingGate": "Gate 1",
+    "expectedRateOfDescent": 2000, # in ft/min
+    "airliner": "Boeing 737-700",
+    "flightStatus": "Preparing"
+    
+},
+{
+    "id": "000004",
+    "airline": "American Airlines",
+    "gasUsage": (str(randint(90, 110)/100)), # in gal/s
+    "altitude": str(randint(39950, 40050)), # in mi
+    "expectedAltitude": 40000, # in mi
+    "weight": 185188, # in lbs
+    "weightCapacity": 205000, # in lbs
+    "runway": "Runway 1",
+    "dockingGate": "Gate 1",
+    "expectedRateOfDescent": 2000, # in ft/min
+    "airliner": "Airbus A321-200",
+    "flightStatus": "In Flight"
+}
+]
 
 # 888888 888888 8b    d8 88""Yb 88        db    888888 888888 .dP"Y8 
 #   88   88__   88b  d88 88__dP 88       dPYb     88   88__   `Ybo." 
@@ -160,23 +206,42 @@ class RadarWindow(Screen):
                 self.statusText1 = "Good, Departing"
                 self.plane1.pos = (x1 + dp(5), y1 + dp(5))
 
+                for p in examplePlanes:
+                    if int(p["id"]) == 1:
+                        p["flightStatus"] = "Departing"
+
             if(self.plane2On):
                 self.statusText2 = "Good, Departing"
                 self.plane2.pos = (x2 - dp(5), y2 + dp(3))
+
+                for p in examplePlanes:
+                    if int(p["id"]) == 2:
+                        p["flightStatus"] = "Departing"
             
             if(self.plane3On):
                 self.statusText3 = "Good, Departing"
                 self.plane3.pos = (x3, y3 + dp(5))
 
+                for p in examplePlanes:
+                    if int(p["id"]) == 3:
+                        p["flightStatus"] = "Departing"
+
             if(self.plane4On):
                 if(x4 < dp(400)):
                     self.statusText4 = "Good, Landing"
                     self.plane4.pos = (x4 + dp(5), y4)
+
+                for p in examplePlanes:
+                    if int(p["id"]) == 4:
+                        p["flightStatus"] = "Landing"
                 
             if(x4 >= 400):
-                    self.statusText4 = "Good, Landed"
-                    self.label4.text = "ID               : 000004\nPosition     : " + str(int(x4)) + ", " + str(int(y4)) + " \nAirline        : American Airlines\nStatus        : " + self.statusText4
-                    
+                self.statusText4 = "Good, Landed"
+                self.label4.text = "ID               : 000004\nPosition     : " + str(int(x4)) + ", " + str(int(y4)) + " \nAirline        : American Airlines\nStatus        : " + self.statusText4
+                
+                for p in examplePlanes:
+                    if int(p["id"]) == 4:
+                        p["flightStatus"] = "Landed"
 
             #only add widget once
             if(x4 + dp(20) > 0 and self.infoOn):
@@ -312,7 +377,7 @@ class PlaneInfoWindow(Screen):
                 return
         
         # No plane found with the given id
-        self.ids.PlaneInfoPlaneIDGetInfoResult.text = "No plane foudn with ID: " + planeInfoIDText
+        self.ids.PlaneInfoPlaneIDGetInfoResult.text = "No plane found with ID: " + planeInfoIDText
 
 
 
@@ -350,15 +415,16 @@ class PlaneInfoList(BoxLayout):
         query_result = [
             ['Plane ID', str(plane['id'])],
             ['Airline', str(plane['airline'])],
-            # TODO: Update the object instead of this value
-            ['Gas Usage', str(randint(90, 110)/100) + " gal/s"],
-            ['Altitude', str(randint(39950, 40050)) + " mi"],
+            ['Flight Status', str(plane['flightStatus'])],
+            ['Gas Usage', str(plane['gasUsage']) + " gal/s"],
+            ['Altitude', str(plane['altitude']) + " mi"],
             ['Expected Altitude', str(plane['expectedAltitude']) + " mi"],
             ['Weight', str(plane['weight']) + " lbs"],
             ['Weight Capacity', str(plane['weightCapacity']) + " lbs"],
             ['Runway', str(plane['runway'])],
             ['Docking Gate', str(plane['dockingGate'])],
-            ['Expected rate of descent', str(plane['expectedRateOfDescent']) + " ft/min"]
+            ['Expected rate of descent', str(plane['expectedRateOfDescent']) + " ft/min"],
+            ['Airliner', str(plane['airliner'])]
         ]
 
         # Populate list with data values
@@ -537,6 +603,7 @@ class MasterLogWindow(Screen):
 class MasterLogRow(RecycleDataViewBehavior,BoxLayout):
     datetime = StringProperty()
     note = StringProperty()
+    planeID = StringProperty()
     def __init__(self, **kwargs):
         super(MasterLogRow, self).__init__(**kwargs)
 
@@ -565,8 +632,8 @@ class MasterLogList(BoxLayout):
 
         self.rv.data = [
             {'datetime': datetimes[x],
-             'aircraft_number': aircraftNumber[x],
-             'note': notes[x]}
+                'planeID': aircraftNumber[x],
+                'note': notes[x]}
             for x in range(3)]
 
 # 88 88b 88  dP""b8 88 8888b.  888888 88b 88 888888     88      dP"Yb   dP""b8 
