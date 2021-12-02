@@ -62,7 +62,7 @@
         font_size: dp(20)
         text: "Contact Pilot"
         on_release: 
-            #root.contactPilot()
+            root.contactPilot(root.channel_text)
             Factory.CommunicationChannel().open()
 
 <CommunicationsWindow>:

@@ -157,6 +157,9 @@ class RadarWindow(Screen):
     newFiller = Widget
     newSeparator = Label
 
+    # Bad weather
+    badWeather = False
+
     #use to update status text
     statusText1 = "Good"
     statusText2 = "Good"
@@ -168,10 +171,12 @@ class RadarWindow(Screen):
 
         #update screen every .1 seconds
         Clock.schedule_interval(self.update, .25)
+
+    def makeGoodWeather(self, dt):
+        self.badWeather = False
         
     #the method for the animation
     def update(self, dt):
-
         #disable label until plane is in sight
         if(self.infoOn2):
             self.infoOn2 = False
@@ -248,26 +253,28 @@ class RadarWindow(Screen):
 
             #only add widget once
             if(x4 + dp(20) > 0 and self.infoOn):
-                    self.infoOn = False
-                    self.newFiller = self.filler
-                    self.planeInfo.remove_widget(self.filler)
-                    self.planeInfo.add_widget(self.newLabel)
-                    self.planeInfo.add_widget(self.newSeparator)
-                    self.planeInfo.add_widget(self.newFiller)
+                self.infoOn = False
+                self.newFiller = self.filler
+                self.planeInfo.remove_widget(self.filler)
+                self.planeInfo.add_widget(self.newLabel)
+                self.planeInfo.add_widget(self.newSeparator)
+                self.planeInfo.add_widget(self.newFiller)
 
             #removing plane if it is out of bound of  radar
             if(x1 > w1 or x1 < 0 or y1 > h1 or y1 < 0):
                 self.plane1On = False
                 self.planeInfo.remove_widget(self.label1)
                 self.remove_widget(self.plane1)
-                self.plane2On = True
+                if self.badWeather == False:
+                    self.plane2On = True
 
             if(x2 > w1 or x2 < 0 or y2 > h1 or y2 < 0):
                 self.plane2On = False
                 self.planeInfo.remove_widget(self.label2)
                 self.remove_widget(self.plane2)
-                self.plane3On = True
-                self.plane4On = True
+                if self.badWeather == False:
+                    self.plane3On = True
+                    self.plane4On = True
 
             if(x3 > w1 or x3 < 0 or y3 > h1 or y3 < 0):
                 self.plane3On = False
@@ -280,6 +287,8 @@ class RadarWindow(Screen):
                 self.remove_widget(self.plane4)
 
     def createWeatherIncident(self):
+        Clock.schedule_once(self.makeGoodWeather, 30)
+        self.badWeather = True
         incident_log_access.add_Row(23, "Bad weather detected")
 
 #class for plane
@@ -867,6 +876,10 @@ class ChannelRow(GridLayout):
     channel_text = StringProperty()
     def __init__(self, **kwargs):
         super(ChannelRow, self).__init__(**kwargs)
+
+    def contactPilot(self, planeID):
+        print("contacting pilot of plane " + str(planeID))
+        master_log_access.add_Row("Contacted plane " + str(planeID), "", "0", int(planeID))
 
 # Class for controller for simulated workers
 class SimulatedWorkerAnimationController():
