@@ -4,6 +4,10 @@
 # Description:
 #   Definition of the GUI of the login screen 
 
+# Variables
+#:set labelFontSize 50
+#:set textInputFontSize 40
+
 <LoginWindow>:
     canvas.before:
         Color:
@@ -15,35 +19,76 @@
     passwordSubmit: Password
     
 
-    GridLayout:
-        cols:1
+    BoxLayout:
+        orientation: 'vertical'
         padding: [70, 50, 70, 50]
         
         Label:
             text: "Login"
-            font_size: '50sp'
-        GridLayout:
-            cols: 2
-            spacing: '10dp'
-           
-            Label:
-                text: "Username: "
-                font_size: dp(30)
+            font_size: dp(70)
 
-            TextInput:
-                id: User
-                multiline: False
-                font_size: dp(20)
+        RelativeLayout:
+            BoxLayout:
+                orientation: 'vertical'
+                id: credentialLayout
+                size_hint_x: None
+                width: root.width / 2
+                x: self.width/3
 
-            Label:
-                text: "Password: "
-                font_size: dp(30)
+                BoxLayout:
+                    id: usernameCred
+                    orientation: 'horizontal'
+                    x: self.width/4
+                    BoxLayout:
+                        orientation: 'horizontal'
 
-            TextInput:
-                id:Password
-                multiline: False
-                password: True
-                font_size: dp(20)
+                        AnchorLayout:
+                            anchor_y: 'center'
+                            size_hint_x: None
+                            size_hint_y: 1
+                            size: usernameLabel.texture_size
+                            Label:
+                                id: usernameLabel
+                                text: "Username:    "
+                                font_size: dp(labelFontSize)
+
+                        AnchorLayout:
+                            anchor_y: 'center'
+                            TextInput:
+                                id: User
+                                multiline: False
+                                font_size: dp(textInputFontSize)
+                                size_hint_y: None
+                                height: 1.5 * dp(textInputFontSize)
+
+                BoxLayout:
+                    id: passwordCred
+                    x: self.width/4
+                    y: usernameCred.height
+                    orientation: 'horizontal'
+
+                    BoxLayout:
+                        orientation: 'horizontal'
+
+                        AnchorLayout:
+                            anchor_y: 'center'
+                            size_hint_x: None
+                            size_hint_y: 1
+                            size: passwordLabel.texture_size
+                            Label:
+                                id: passwordLabel
+                                text: "Password:    "
+                                font_size: dp(labelFontSize)
+
+                        AnchorLayout:
+                            anchor_y: 'center'
+                            TextInput:
+                                id:Password
+                                multiline: False
+                                password: True
+                                font_size: dp(textInputFontSize)
+                                size_hint_y: None
+                                height: 1.5 * dp(textInputFontSize)
 
         Label:
             text: root.textSubmit
@@ -53,4 +98,4 @@
         Button:
             text: "Submit"
             on_release: root.onSubmit()
-            font_size: 40
+            font_size: dp(60)

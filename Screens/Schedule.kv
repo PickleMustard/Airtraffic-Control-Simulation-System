@@ -5,6 +5,9 @@
 #   Definition of the GUI for the view of the schedule.
 #   It contains the list of arrivals and departures
 
+#:set listFontSize 25
+#:set listTitleSize 45
+
 <ArrivalRow>:
     canvas.before:
         Color:
@@ -16,8 +19,10 @@
     planeArrivalTime: ''
     Label:
         text: root.planeName
+        font_size: dp(listFontSize)
     Label:
         text: root.planeArrivalTime
+        font_size: dp(listFontSize)
 
 <DepartureRow>:
     canvas.before:
@@ -30,8 +35,10 @@
     planeDepartureTime: ''
     Label:
         text: root.planeName
+        font_size: dp(listFontSize)
     Label:
         text: root.planeDepartureTime
+        font_size: dp(listFontSize)
 
 
 <ScheduleWindow>:
@@ -69,7 +76,7 @@
 
         Label:
             text: 'Arrivals'
-            font_size: sp(20)
+            font_size: dp(listTitleSize)
             size_hint: 1, .1
 
         RecycleView:
@@ -101,7 +108,7 @@
 
         Label:
             text: 'Departures'
-            font_size: sp(20)
+            font_size: dp(listTitleSize)
             size_hint: 1, .1
 
         RecycleView:

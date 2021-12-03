@@ -1,6 +1,13 @@
 #:kivy 2.0.0
 #:import Factory kivy.factory.Factory
 
+#:set listFontSize 25
+#:set searchFontSize 27
+#:set buttonFontSize 30
+#:set alertFontSize 20
+#:set listTitleSize 35
+#:set planeInfoSize 25
+
 #this is for demonstration only
 #this will be use to act out bad weather
 #a warning will show if there is bad weather
@@ -17,12 +24,17 @@
 
         orientation: "vertical"
         Label:
-            text: "Bad Weather Warning\nPilots notified"
+            text: "Bad Weather Warning"
             color: 1, 0, 0, 1
+            font_size: dp(alertFontSize)
         Label:
+            text: "Pilots notified"
+            color: 1, 0, 0, 1
+            font_size: dp(alertFontSize)
         Button:
             text: "Ok"
             on_release: root.dismiss()
+            font_size: dp(alertFontSize)
     
 #simple radar mock up
 <RadarWindow>:
@@ -104,7 +116,7 @@
                     size: self.size
             Label
                 text: "Plane Info"
-                font_size: sp(30)
+                font_size: sp(40)
                 size_hint_y: None
                 height: 50
             BoxLayout:
@@ -122,6 +134,7 @@
                     id: labelA
                     size_hint: None, None
                     size: root.width * 1/3, root.height * .15
+                    font_size: dp(planeInfoSize)
                     
                 Label:
                     size_hint_y: None
@@ -135,6 +148,7 @@
                     id: labelB
                     size_hint: None, None
                     size: root.width * 1/3, root.height * .15
+                    font_size: dp(planeInfoSize)
                     
                 Label:
                     size_hint_y: None
@@ -148,6 +162,7 @@
                     id: labelC
                     size_hint: None, None
                     size: root.width * 1/3, root.height * .15
+                    font_size: dp(planeInfoSize)
                     
                 Label:
                     size_hint_y: None
@@ -161,6 +176,7 @@
                     id: labelD
                     size_hint: None, None
                     size: root.width * 1/3, root.height * .15
+                    font_size: dp(planeInfoSize)
                     
                 Label:
                     id: separator
@@ -191,15 +207,16 @@
                     on_release: 
                         root.createWeatherIncident()
                         Factory.MyPopup().open()
+                    font_size: dp(buttonFontSize)
                 Button:
                     text: "Main Menu"
                     on_release:
                         app.root.current = "menuScreen"
                         root.manager.transition.direction = "right"
+                    font_size: dp(buttonFontSize)
 
 #this is the illustration of the planes
 <Plane@Widget>:
-
     canvas:
         Color:
             rgb: 1, 0 ,0, 1

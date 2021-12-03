@@ -3,6 +3,12 @@
 # GroundCrewSimulation.kv
 #   Definition of the GUI for simulation of the ground crew
 
+#:set listFontSize 25
+#:set searchFontSize 27
+#:set buttonFontSize 30
+#:set alertFontSize 20
+#:set listTitleSize 35
+
 <GroundCrewWorker@Image>
     source: "./resources/images/GoogleWorker.png"
     size_hint_x: .015
@@ -23,12 +29,17 @@
 
         orientation: "vertical"
         Label:
-            text: "Engineering check completed\nPilots notified"
+            text: "Engineering check completed"
+            font_size: dp(alertFontSize)
             color: 1, 1, 1, 1
         Label:
+            text: "Pilots notified"
+            font_size: dp(alertFontSize)
+            color: 1, 1, 1, 1
         Button:
             text: "Ok"
             on_release: root.dismiss()
+            font_size: dp(alertFontSize)
 
 <ExtendGatePopup@Popup>:
 
@@ -43,11 +54,13 @@
         orientation: "vertical"
         Label:
             text: "Gate successfully extended"
+            font_size: dp(alertFontSize)
             color: 1, 1, 1, 1
         Label:
         Button:
             text: "Ok"
             on_release: root.dismiss()
+            font_size: dp(alertFontSize)
 
 <GroundCrewSimulationWindow>:
     name: "GroundCrewSimulation"
@@ -75,16 +88,17 @@
             size_hint: 1, .07
             cols: 6
             spacing: dp(10)
-
             padding: dp(4)
 
             Button:
                 text: "Engineering checks"
                 on_release: root.engineeringCheck()
+                font_size: dp(buttonFontSize)
             
             Button:
                 text: "Extend Gate"
                 on_release: root.extendGate()
+                font_size: dp(buttonFontSize)
 
         FloatLayout:
             canvas: 

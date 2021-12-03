@@ -6,8 +6,11 @@
 
 #:import Factory kivy.factory.Factory
 
-#this is for demonstration only
-# This will 
+#:set listFontSize 25
+#:set searchFontSize 35
+#:set buttonFontSize 30
+#:set alertFontSize 20
+
 <OverweightPopup@Popup>:
 
     auto_dismiss: False
@@ -23,10 +26,12 @@
         Label:
             text: "OVERWEIGHT"
             color: 1, 0, 0, 1
+            font_size: dp(alertFontSize)
         Label:
         Button:
             text: "Ok"
             on_release: root.dismiss()
+            font_size: dp(alertFontSize)
 
 <PlaneInfoWindow>:
     name: "PlaneInfo"
@@ -65,21 +70,21 @@
 
                 Label: 
                     text: "Plane ID: "
-                    font_size: dp(25)
+                    font_size: dp(searchFontSize)
                     size: self.texture_size
                     size_hint: .2, 1
 
                 TextInput:
                     id: PlaneInfoPlaneID
                     multiline: False
-                    font_size: dp(25)
+                    font_size: dp(buttonFontSize)
                     on_text_validate: root.getInfo()
                 
                 # Plane ID search result
                 Label: 
                     id: PlaneInfoPlaneIDGetInfoResult
                     text: ''
-                    font_size: dp(25)
+                    font_size: dp(searchFontSize)
                     color: 1, 0, 0, 1
 
 
@@ -101,23 +106,29 @@
                 Button:
                     text: "Refresh"
                     on_release: PlaneInfoList.refresh()
+                    font_size: dp(buttonFontSize)
                 
                 Button:
                     text: "Make overweight"
                     on_release: 
                         PlaneInfoList.makeOverweight()
                         on_release: Factory.OverweightPopup().open()
+                    font_size: dp(buttonFontSize)
 
                 AnchorLayout:
                     anchor_x: 'right'
+                    anchor_y: 'center'
 
                     TextInput:
                         id: PlaneInfoTextInput
-                        size_hint: 1, .8
+                        size_hint_x: 1
+                        size_hint_y: None
+                        height: dp(buttonFontSize) * 1.5
                         hint_text: "Search"
                         multiline: False
                         halign: 'center'
                         on_text_validate: root.search()
+                        font_size: dp(buttonFontSize)
 
         # Info list
         PlaneInfoList: 
@@ -136,8 +147,10 @@
     
     Label:
         text: root.dataName
+        font_size: dp(listFontSize)
     Label:
         text: root.dataValue
+        font_size: dp(listFontSize)
 
 <PlaneInfoList>:
     canvas:

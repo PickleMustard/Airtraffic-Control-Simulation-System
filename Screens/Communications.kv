@@ -3,6 +3,12 @@
 # Communications.kv
 #   Definition of the GUI for simulation of a communications
 
+#:set listFontSize 25
+#:set searchFontSize 27
+#:set buttonFontSize 30
+#:set alertFontSize 20
+#:set listTitleSize 35
+
 <CommunicationChannel@Popup>:
 
     auto_dismiss: False
@@ -18,10 +24,12 @@
         Label:
             text: "Notifying pilot to respond"
             color: 1, 0, 0, 1
+            font_size: dp(alertFontSize)
         Label:
         Button:
             text: "Ok"
             on_release: root.dismiss()
+            font_size: dp(alertFontSize)
 
 <ChannelLabel@Label>:
     text: ""
@@ -59,7 +67,7 @@
      
     #Contact Pilot
     Button:
-        font_size: dp(20)
+        font_size: dp(buttonFontSize)
         text: "Contact Pilot"
         on_release: 
             root.contactPilot(root.channel_text)
@@ -95,8 +103,7 @@
             Button:
                 text: "Bring down"
                 on_release: root.bringDown()
-
-
+                font_size: dp(buttonFontSize)
 
         # Column headers
         GridLayout: 
@@ -114,17 +121,18 @@
             padding: dp(4)
 
             Label: 
-                font_size: dp(20)
                 text: "Channel"
                 size: self.texture_size
+                font_size: dp(listTitleSize)
             
             Label: 
-                font_size: dp(20)
+                font_size: dp(listTitleSize)
                 text: "Status"
                 size: self.texture_size
 
             Label:
                 text: "Contact"
+                font_size: dp(listTitleSize)
 
         # Channels
         GridLayout:

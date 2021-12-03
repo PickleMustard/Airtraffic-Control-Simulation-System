@@ -4,6 +4,12 @@
 # Description:
 #   Definition of GUI for display of the master log
 
+#:set listFontSize 25
+#:set searchFontSize 27
+#:set buttonFontSize 30
+#:set alertFontSize 20
+#:set listTitleSize 35
+
 <MasterLogWindow>:
     name: "MasterLog"
     canvas.before:
@@ -25,6 +31,7 @@
             text: "Refresh"
             on_release: MasterLogList.refresh()
             size_hint: 1, .07
+            font_size: dp(buttonFontSize)
 
         # Fields
         BoxLayout:
@@ -36,7 +43,7 @@
                     pos: self.pos
 
             orientation: 'horizontal'
-            size_hint: 1, .1
+            size_hint: 1, .11
             cols: 10
             padding: dp(10), 0, dp(10), 0
 
@@ -47,10 +54,13 @@
                     font_size: dp(20)
                     text: "Datetime"
                     size: self.texture_size
+                    font_size: dp(listTitleSize)
                 TextInput:
                     id: MasterLogDatetimeTextInput
                     multiline: False
                     on_text_validate: root.search()
+                    font_size: dp(searchFontSize)
+
 
             # PlaneID
             BoxLayout:
@@ -58,11 +68,13 @@
                 Label:
                     font_size: dp(20)
                     text: "Plane ID"
-                    size: self.texture_size                
+                    size: self.texture_size
+                    font_size: dp(listTitleSize)             
                 TextInput:
                     id: MasterLogPlaneIDTextInput
                     multiline: False
                     on_text_validate: root.search()
+                    font_size: dp(searchFontSize)
 
             # note
             BoxLayout:
@@ -71,10 +83,12 @@
                     font_size: dp(20)
                     text: "Note"
                     size: self.texture_size
+                    font_size: dp(listTitleSize)
                 TextInput:
                     id: MasterLogNoteTextInput
                     multiline: False
                     on_text_validate: root.search()
+                    font_size: dp(searchFontSize)
 
         # Master Log List
         MasterLogList:
